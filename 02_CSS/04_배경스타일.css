@@ -1,0 +1,45 @@
+/* background-color */
+.div-test {
+  background-color: peachpuff;
+  padding: 30px;
+  border: 5px dashed orange;
+  margin-bottom: 20px;
+}
+#bc {
+  background-color: lightblue;
+}
+/* background-clip */
+#bc1 {
+  background-clip: content-box;
+}
+#bc2 {
+  /* content + padding */
+  background-clip: padding-box;
+}
+#bc3 {
+  /* content + padding + border */
+  background-clip: border-box;
+}
+/* 배경 이미지 테스트*/
+#test {
+  width: 400px;
+  height: 300px;
+  border: 20px solid;
+
+  background-image: url("assets/bg.jpg");
+  /* size : 이미지 크기 조절 px, contain, cover */
+  /* 사진이 다 나옴 */
+  /* background-size: contain; */
+  /* 맞춰서 사진이 들어감 */
+  background-size: cover;
+  /* background-size: 100px; */
+  /* repeat : 사진 반복 여부 설정 no-repeat*/
+  background-repeat: no-repeat;
+  /* position : 이미지 위치 설정 center */
+  background-position: bottom right;
+  /* attachment : 스크롤 여부 확인
+       scroll:스크롤 시 사진도 움직임
+       fixed: 스크롤 시 사진만 고정*/
+  background-attachment: fixed;
+}
+/* background :color image position/size repeat attachment */

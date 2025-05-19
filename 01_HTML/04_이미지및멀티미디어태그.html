@@ -7,8 +7,68 @@
   </head>
   <body>
     <h2>이미지 태그</h2>
-    <img src="./istockphoto.jpg" alt="영화관 이미지" />
+    <!-- loading-"lazy"는 사용자가 화면을 내릴 때 성능 최적화 -->
+    <img src="./movie.jpg" alt="영화관 이미지" width="200" loading="lazy" />
     <!-- ../는 상위 폴더로 올라감 -->
     <!-- ./는 동일 폴더에서 찾음 -->
+
+    <h3>고정 크기 (픽셀 단위)</h3>
+    <p>화면 크기와 관계없이 고정된 크기</p>
+    <img src="assets/coke.jpg" alt="" width="200" height="120" />
+    <img src="assets/popcorn.jpg" alt="" width="200" height="120" />
+
+    <h3>가변 크기 (퍼센트 단위)</h3>
+    <p>부모 태그의 너비에 따라 크기가 자동으로 조절</p>
+    <!-- 웹에서 가로의 전체 길이가 100% -->
+    <img src="assets/coke.jpg" alt="" width="49%" height="120" />
+    <img src="assets/popcorn.jpg" alt="" width="49%" height="120" />
+
+    <h3>반응형 이미지</h3>
+    <p>디바이스 너비에 따라 최적의 이미지를 자동 선택</p>
+    <img
+      src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+      srcset="https://images.unsplash.com/photo-1518770660439-4636190af475w=480 480w
+             https://images.unsplash.com/photo-1518770660439-4636190af475w=800 800w
+             https://images.unsplash.com/photo-1518770660439-4636190af475w=1200 1200w"
+      sizes="(max-width: 600px), (max-width: 900px) 800px, 1200px"
+      alt=""
+      width="100%"
+    />
+
+    <h2>오디오 태그</h2>
+    <!--
+   -controls : 재생 컨트롤러 표시
+   -loop : 반복 재생
+   -->
+    <audio src="assets/audio.mp3" controls loop></audio>
+
+    <a href="assets/audio.mp3" download="">오디오 다운로드</a>
+
+    <h2>비디오 태그</h2>
+    <!-- 현재는 유튜브 영상을 자주 쓰기 때문에 이 태그는 자주 쓰지 않음 -->
+    <!-- 
+        -controls : 재생 컨트롤러 표시
+        -poster : 썸네일 이미지 
+        -->
+    <!-- 썸네일 없는 경우 -->
+    <video src="assets/video.mp4" controls></video>
+    <!-- 썸네일 있는 경우 -->
+    <video
+      src="assets/video.mp4"
+      controls
+      poster="assets/thumbnail.png"
+    ></video>
+
+    <!-- iframe : 외부 콘텐츠 삽입 (현재는 자주 쓰이지 않고, 현재는 유튜브 영상을 넣을 때 쓰임) -->
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/BKU4eOWSthQ?si=pW9yxiECYTV2wU2L"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
   </body>
 </html>

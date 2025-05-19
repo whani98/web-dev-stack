@@ -1,0 +1,12 @@
+/* width, height */
+/* px : 고정크기,/ % : 부모 기준 비율 / vw, hv : 뷰포트 너비, 높이 기준 비율 */
+#fixed-size {
+  width: 300px;
+  height: 150px;
+  background-color: lightblue;
+}
+#variable-size {
+  width: 80%;
+  height: 100vh;
+  background-color: lightgreen;
+}
