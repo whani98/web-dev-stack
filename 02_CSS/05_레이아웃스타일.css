@@ -1,5 +1,5 @@
 /* width, height */
-/* px : 고정크기,/ % : 부모 기준 비율 / vw, hv : 뷰포트 너비, 높이 기준 비율 */
+/* px : 고정크기,/ % : 부모 기준 비율 / vw, hv : 뷰포트 너비, 높이 기준 */
 #fixed-size {
   width: 300px;
   height: 150px;
@@ -9,4 +9,228 @@
   width: 80%;
   height: 100vh;
   background-color: lightgreen;
+}
+
+/* padding, margin */
+.space {
+  background: lightyellow;
+  border: 1px solid;
+  margin-bottom: 10px;
+}
+#padding1 {
+  padding: 20px;
+}
+#padding2 {
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  /* 위 네 줄과 아래 한 줄이 같은 의미 */
+  /* top right bottom left 순(top 기준 시계방향 순) */
+  padding: 30px 20px 40px 10px;
+  /* top rigjt/left bottom */
+  padding: 30px 20px 40px;
+  /* top/bottm left/right*/
+  padding: 30px 20px;
+}
+/* margin 줄 간격 최대 20px (두 margin 간격이 합해서 25px 이어도 20px)*/
+#margin1 {
+  /* 보통 전체적으로 네 방향에 같은 값을 주는 편! */
+  margin: 20px;
+}
+#margin2 {
+  /* top right bottom left 순(top 기준 시계방향 순) */
+
+  margin: 5px 15px 10px 30px;
+}
+.collapse-box {
+  background-color: lightcoral;
+  padding: 10px;
+  /* #444==#444444 */
+  border: 1px solid #444;
+}
+#box1 {
+  margin-bottom: 50px;
+}
+#box2 {
+  margin-top: 30px;
+}
+#center-box {
+  width: 200px;
+  height: 100px;
+  background: lightseagreen;
+  /* height와 line-height 사이즈를 똑같이 맞추면 가운데 정렬 */
+  color: white;
+  text-align: center;
+  line-height: 100px;
+  margin: auto;
+}
+
+.border {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background: #eee;
+  display: inline-block;
+}
+#border1 {
+  /* solid : 실선 */
+  border: 3px solid red;
+}
+#border2 {
+  /* dashed : 점선 */
+  border: 3px dashed green;
+}
+#border3 {
+  /* dotted: 도트선 */
+  border: 2px dotted blue;
+}
+.radius-box {
+  width: 120px;
+  height: 120px;
+  background: plum;
+  color: white;
+  text-align: center;
+  line-height: 120px;
+  margin-bottom: 10px;
+}
+.radius1 {
+  border-radius: 10px;
+}
+.radius2 {
+  /* 50%는 항상 원형 */
+  border-radius: 50%;
+}
+/* 5월 19일 끝 */
+
+/* box-sizing */
+.box {
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  border: 10px solid;
+  background-color: lightcoral;
+  margin: 10px;
+}
+.box-content {
+  /* width : 360px(300+20*2+10*2) height : 260px(200+20*2+10*2) */
+  box-sizing: content-box;
+}
+.box-border {
+  /* width : 300px height : 200px */
+  box-sizing: border-box;
+}
+/* display */
+.display {
+  background-color: pink;
+  padding: 10px;
+  margin: 5px;
+  width: 150px;
+  height: 70px;
+}
+.display-inline {
+  /* 적용안됨! 다시 살펴보기 */
+  display: inline;
+}
+.display-block {
+  display: block;
+}
+.display-inline-block {
+  display: inline-block;
+}
+/* float */
+.float {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+  background: skyblue;
+  text-align: center;
+  line-height: 80px;
+}
+/* position */
+#outer {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  background: #f4f4f4;
+  overflow: auto;
+}
+.position-box {
+  width: 100px;
+  height: 100px;
+}
+
+#relative {
+  background: orange;
+  position: relative;
+  /* 속성 : top, bottom, left, right / 마이너스도 가능, 원래 자리 기준에서 움직인다. */
+  bottom: 100px;
+  right: -50px;
+}
+#absolute {
+  /* 절대적이다. 브라우저 왼쪽 맨 위 기준으로 움직인다./outer를 만들면 그 기준으로 움직인다. */
+  background: green;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+}
+#fixed {
+  /* fixed : 스크롤 해도 고정, 보통 헤더 고정 시 사용 */
+  background: red;
+  position: fixed;
+  right: 20px;
+  top: 30px;
+}
+#sticky {
+  background: blue;
+  position: sticky;
+  top: 0;
+}
+/* visibility */
+.visibility {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background: lightgray;
+  display: inline-block;
+}
+#vis1,
+#dis2 {
+  visibility: visible;
+}
+#vis1 {
+  visibility: hidden;
+}
+#dis1 {
+  display: none;
+}
+
+#z-outer {
+  width: 200px;
+  height: 200px;
+  background: #ddd;
+  position: relative;
+  opacity: 0.5;
+}
+.z-index {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+#z-index1 {
+  background: red;
+  z-index: 1;
+  top: 40px;
+  left: 20px;
+}
+#z-index2 {
+  background: green;
+  z-index: 2;
+  top: 40px;
+  left: 40px;
+}
+#z-index3 {
+  background: blue;
+  z-index: 9999;
 }

@@ -32,6 +32,7 @@
   /* background-size: contain; */
   /* 맞춰서 사진이 들어감 */
   background-size: cover;
+  /* 원하는 사이즈의 사진 */
   /* background-size: 100px; */
   /* repeat : 사진 반복 여부 설정 no-repeat*/
   background-repeat: no-repeat;

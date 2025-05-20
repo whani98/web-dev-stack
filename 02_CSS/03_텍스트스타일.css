@@ -132,14 +132,14 @@
 }
 /* letter-spacing / word-spacing */
 #ls {
-  \letter-spacing: 10px;
+  letter-spacing: 10px;
 }
 #ws {
   word-spacing: 20px;
 }
 /* text-align */
 #ta1 {
-  taxt-align: left;
+  text-align: left;
 }
 #ta2 {
   text-align: right;
