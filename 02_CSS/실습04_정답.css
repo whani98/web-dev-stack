@@ -1,0 +1,60 @@
+:root {
+  /* 변수 함수 */
+  --main-width: 240px;
+  --main-color: rgba(0, 2, 0, 0.3);
+}
+header {
+  /* 스크롤 해도 움직이지 않도록 고정 */
+  position: fixed;
+  background-color: var(--main-color);
+  width: var(--main-width);
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url(assets/background.jpg);
+  background-blend-mode: color;
+  background-position: center;
+  background-size: cover;
+}
+header h1 {
+  font-size: 4rem;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  padding-inline: 10px;
+  border-bottom: 3px solid white;
+}
+header nav {
+  display: flex;
+  /* 세로로 정렬 */
+  flex-direction: column;
+  padding-bottom: 150px;
+  gap: 10px;
+}
+header nav a {
+  text-decoration: underline;
+  padding: 5px;
+}
+main {
+  padding: 10px;
+  /* 240 + 10 = 260 */
+  padding-left: calc(var(--main-width) + 10px);
+  text-align: center;
+}
+main h2,
+main p {
+  text-align: left;
+}
+h2 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+main img {
+  width: 100%;
+  /* 이미지 크기 최댓값 지정 */
+  max-width: 400px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}

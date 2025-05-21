@@ -1,0 +1,44 @@
+header {
+  display: flex;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.356);
+  background-blend-mode: color;
+  background-image: url(assets/background.jpg);
+  background-size: cover;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: white;
+  font-weight: bold;
+}
+h1 {
+  font-size: 3rem;
+  padding: 25px;
+  text-decoration: underline;
+}
+header nav {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 70px;
+  text-decoration: underline;
+}
+header nav a {
+  display: flex;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  padding-left: 75px;
+}
+section {
+  display: flex;
+  padding-left: 200px;
+}
+section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 10px;
+}
+section img {
+  display: flex;
+  margin: 25px auto;
+}

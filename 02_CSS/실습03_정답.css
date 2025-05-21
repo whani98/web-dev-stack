@@ -1,0 +1,80 @@
+header {
+  position: fixed;
+  background: white;
+  /* 가로로 꽉 채울 때 사용 */
+  width: 100%;
+  /* flex 쓰려면 꼭 부모 태그에 명시 */
+  display: flex;
+  /* 부모 태그에만 줄 수 있는 정렬, 여기서는 h1과 nav를 양쪽으로 나누었다. */
+  justify-content: space-between;
+}
+header h1 {
+  font-size: 2rem;
+  padding: 10px;
+  font-weight: bold;
+}
+header nav {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+}
+header nav a {
+  display: flex;
+  /* 여기서는 a가 컨테이너, 글자가 아이템 */
+  align-items: center;
+  padding: 5px;
+  /*이것도 가능! 
+    display: inline-block;
+    height: 52px;
+    line-height: 52px;
+    padding: 5px; */
+}
+header nav a:hover {
+  background: black;
+  color: white;
+}
+section {
+  /* vh 보이는 만큼 채워짐 */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 방향 복구 */
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
+section h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+section p {
+  line-height: 1.5;
+  text-align: center;
+  width: 70%;
+}
+#section1 {
+  /* 헤더만큼 위로 밀어버리는 것도 가능 
+    padding-top: 52px;*/
+  background-color: black;
+  color: white;
+}
+#section2 {
+  background-color: palevioletred;
+}
+#section3 {
+  background-color: rgb(145, 93, 145);
+}
+.top {
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  background: black;
+  width: 70px;
+  height: 70px;
+  color: aliceblue;
+  border-radius: 50%;
+  /* 아래 세 가지를 써야 정중앙 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

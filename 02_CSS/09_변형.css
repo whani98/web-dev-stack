@@ -1,0 +1,84 @@
+section {
+  display: flex;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  background-color: black;
+  color: white;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: auto;
+}
+.transition {
+  background-color: cadetblue;
+  /* transition: all 10s; */
+  /* transition-property: background-color, font-size; 
+    이렇게 쓸 바엔 all을 쓴다.*/
+  /* property : 속성 명시, duration : 전환 시간,
+       timing-funtion : 전환 속도 곡선, delay : 전환 시간 지연 시간 */
+  transition-property: all;
+  transition-duration: 5s;
+  /*transition-timing-function: ease-in-out; : 속도 기본값 */
+  transition-timing-function: ease-in-out;
+  /* transition-timing-function: linear; 속도가 증가*/
+  transition-delay: 1s;
+  /* 한 번에 적을 수 있다. */
+  transition: all 2s ease-in-out 1s;
+}
+.transition:hover {
+  background-color: coral;
+  font-size: 2rem;
+  /* sacle: 1.5배 확대, rotate : 회전 */
+  transform: scale(1.5) rotate(15deg);
+  border-radius: 50%;
+}
+/* transform */
+.transform-scale {
+  background-color: coral;
+}
+.transform-scale:hover {
+  /* scale(n) : n배 크기 확대 */
+  transform: scale(2);
+}
+
+.transform-rotate {
+  background: orange;
+}
+.transform-rotate:hover {
+  /* rotate(n) : n도 만큼 회전 */
+  transform: rotate(45deg);
+}
+
+.transform-translate {
+  background: mediumaquamarine;
+}
+.transform-translate:hover {
+  /* translate : (x, y)만큼 이동 */
+  transform: translate(40px, 20px);
+}
+.transform-skew {
+  background-color: dodgerblue;
+}
+.transform-skew:hover {
+  /* skew : (x, y)만큼 기울이기 */
+  transform: skew(10deg, 20deg);
+}
+/* Animation */
+
+@keyframes bounce {
+  0% {
+    /* 0 :현재위치 */
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(25px, 50px);
+  }
+}
+.animation-once {
+  background-color: crimson;
+  /* animation : 애니메이션명 지속시간 속도곡선 횟수*/
+  animation: bounce 1s ease-in-out 3;
+}
