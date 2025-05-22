@@ -73,12 +73,50 @@ section {
     /* 0 :현재위치 */
     transform: translate(0);
   }
+  50% {
+    transform: scale(1.5);
+  }
   100% {
     transform: translate(25px, 50px);
+  }
+}
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translateY(-30px);
   }
 }
 .animation-once {
   background-color: crimson;
   /* animation : 애니메이션명 지속시간 속도곡선 횟수*/
-  animation: bounce 1s ease-in-out 3;
+  animation: bounce 2s ease-in-out 3;
+}
+.animation-alternate {
+  background-color: indigo;
+  animation: bounce 1s ease-in-out infinite alternate;
+}
+
+.animation-reverse {
+  background-color: darkslateblue;
+  animation: bounce2 1s ease-in-out reverse;
+}
+.animation-paused {
+  background-color: mediumaquamarine;
+  animation: bounce2 1s linear infinite;
+}
+.animation-paused:hover {
+  animation-play-state: paused;
+}
+.perspective-container {
+  perspective: 600px;
+}
+.perspective-container .box {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.perspective-container .box:hover {
+  transform: rotateY(180deg);
 }
