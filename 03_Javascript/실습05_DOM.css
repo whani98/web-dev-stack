@@ -1,3 +1,27 @@
 * {
+  margin: 10px;
+}
+body {
+  background-color: rgb(199, 247, 193);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  height: 90vh;
   text-align: center;
+}
+h1,
+h2,
+h3 {
+  margin-bottom: 25px;
+}
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.3rem;
 }

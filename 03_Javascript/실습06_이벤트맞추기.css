@@ -1,0 +1,49 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 70vh;
+  margin: 100px;
+}
+.imgs {
+  display: flex;
+  flex-direction: row;
+}
+img {
+  border-radius: 50%;
+  width: 200px;
+  object-fit: cover;
+  height: 200px;
+  padding: 10px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 120px;
+  gap: 10px;
+  padding-inline: 100px;
+  font-weight: bold;
+}
+.btn #click {
+  background-color: coral;
+  color: indigo;
+  border-radius: 5px;
+  padding-inline: 20px;
+}
+.btn #click:hover {
+  background-color: purple;
+  color: aliceblue;
+}
+.btn #restart {
+  background-color: indigo;
+  color: coral;
+  border-radius: 5px;
+  padding-inline: 20px;
+}
+.btn #restart:hover {
+  background-color: sandybrown;
+  color: indigo;
+}
