@@ -42,7 +42,7 @@ section button {
   margin: 5px;
   border-radius: 3px;
 }
-section button:hover {
+#reset:hover {
   background-color: rgb(34, 185, 153);
   color: aliceblue;
 }
