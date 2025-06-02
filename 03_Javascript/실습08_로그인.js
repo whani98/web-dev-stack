@@ -10,7 +10,7 @@ const show = (name) => {
   });
 };
 
-// 로그인 되어 있는 거지 아닌지 상태 확인
+// 로그인 되어 있는 건지 아닌지 상태 확인
 const info = localStorage.getItem("name");
 if (info) {
   show(info);
