@@ -254,9 +254,9 @@ MEM_NAME VARCHAR2(20) NOT NULL,
 GRADE_ID NUMBER REFERENCES MEM_GRADE(GRADE_CODE) -- 외래키
 );
 INSERT INTO MEM_MEMBER2(MEM_ID, MEM_PWD, MEM_NAME, GRADE_ID)
-                VALUES( 'user01', 'pass01', '윤의진', 1);
+                VALUES('user01', 'pass01', '윤의진', 1);
 INSERT INTO MEM_MEMBER2(MEM_ID, MEM_PWD, MEM_NAME, GRADE_ID) 
-                VALUES( 'user02', 'pass02', '이진용', 2);
+                VALUES('user02', 'pass02', '이진용', 2);
 INSERT INTO MEM_MEMBER2(MEM_ID, MEM_PWD, MEM_NAME,GRADE_ID)
                 VALUES('user03','pass03','곽병현', 3);
 SELECT * FROM MEM_MEMBER2;
@@ -408,3 +408,142 @@ FROM RENT R
 JOIN MEMBER M ON(R.MEMBER_NO=M.MEMBER_NO)
 JOIN BOOK B ON(R.BK_NO=B.BK_NO)
 JOIN PUBLISHER P ON(P.PUB_NO=B.PUB_NO);
+
+/*
+ALTER
+-객체를 수정하는 구문
+
+ALTER TABLE 테이블명 수정할 내용;
+*/
+/*
+1. 컬럼 추가 / 수정 / 삭제 / 이름 변경
+ 1-1. 컬럼 추가 (ADD)
+ ADD 컬럼명 데이터타입 [DEFAULT 기본값];
+*/
+--새로운 컬럼이 만들어지고 기본적으로 기존 테이터는 NULL로 채워짐
+ALTER TABLE USER_INFO ADD CNAME VARCHAR2(20);
+
+--새로운 컬럼이 만들어지고 내가 지정한 기본값으로 채워짐
+ALTER TABLE USER_INFO ADD LNAME VARCHAR(20) DEFAULT '한국';
+
+/*
+1-2. 컬럼 수정(MODIFY)
+-데이터 타입 변경 : MODIFY 컬럼명 변경할 데이터 타입;
+-기본값 변경 : MODIFY 컬럼명 DEFAULT 변경할 기본값;
+*/
+DESC USER_INFO;
+ALTER TABLE USER_INFO MODIFY ADDRESS VARCHAR2(100); --200에서 100으로 변경
+
+--변경하려는 자료형의 크기보다 이미 큰 값이 존재해서 에러!
+ALTER TABLE USER_INFO MODIFY ADDRESS VARCHAR2(10); --오류 : 일부 값이 커서 열 길이를 줄일 수 없음
+
+--변경하려는 자료형의 데이터가 존재할 시 바꾸려고 해서 에러!
+ALTER TABLE USER_INFO MODIFY ADDRESS NUMBER;
+
+--값이 없으면 데이터타입 변경 가능!
+ALTER TABLE USER_INFO MODIFY CNAME NUMBER;
+
+--다중 수정
+ALTER TABLE USER_INFO 
+   MODIFY ADDRESS VARCHAR2(50);
+   MODIFY LNAME DEFAULT '아시아';
+   
+INSERT INTO USER_INFO(USER_ID, NAME) 
+VALUES(USER_ID_SEQ.NEXTVAL,'테스트');
+
+/*
+1-3. 컬럼 삭제 (DROP)
+DROP COLUMN 컬럼명;
+
+-데이터 값이 있어도 같이 삭제됨(삭제된 컬럼 복구는 불가능)
+
+*/
+ALTER TABLE USER_INFO DROP COLUMN LNAME;
+
+--부모키(PRIMARY KEY)참조되고 있는 컬럼이 있다면 삭제 불가능!
+ALTER TABLE BOOK DROP COLUMN BK_NO;
+
+--참조되고 있는 컬럼이 삭제되어 있을 시 가능!
+ALTER TABLE PUBLISHER DROP COLUMN BUB_NO;
+
+/*
+1-4. 컬럼명 변경
+RENAME COLUMN 기존 컬럼명 TO 변경할 컬럼명;
+*/
+ALTER TABLE USER_INFO RENAME COLUMN CONTACT TO PHONE;
+
+SELECT * FROM USER_INFO;
+
+/*
+2. 제약조건
+2-1. 제약조건 추가
+ADD [CONSTRAINT 제약조건명] 
+-PRIMARY KEY : PRIMARY KEY(컬럼명);
+-FOREIGN KEY : FOREIGN KEY(컬럼명) REFERENCES 테이블명(컬럼명);
+-UNIQUE : UNIQUE(컬럼명);
+-CHECK : CHECK(컬럼에 대한 조건);
+
+NOT NULL : MODIFY 컬럼명 [CONSTRAINT 제약조건명] NOT NULL;
+*/
+CREATE TABLE DEPT_COPY
+AS SELECT * FROM DEPARTMENT;
+
+--제약조건명 없이 추가
+ALTER TABLE DEPT_COPY
+ADD PRIMARY KEY(DEPT_ID); --자동으로 만들어진 제약조건명 : SYS_C008330
+
+--제약조건명 추가해서
+ALTER TABLE DEPT_COPY
+ADD CONSTRAINT DEPT_PK PRIMARY KEY(DEPT_ID);
+
+/*
+2-2. 제약조건 삭제
+ALTER TABLE 테이블명 DROP CONSTRAINT 제약조건명;
+*/
+ALTER TABLE DEPT_COPY DROP CONSTRAINT SYS_C008330;
+ALTER TABLE DEPT_COPY DROP CONSTRAINT DEPT_PK;
+
+--제약조건 확인
+SELECT * FROM USER_CONSTRAINTS 
+WHERE TABLE_NAME = 'DEPT_COPY';
+
+
+/*
+2-3. 제약조건명 변경
+RENAME CONSTRAINT 기존 제약조건명 TO 변경할 제약조건명;
+*/
+ALTER TABLE DEPT_COPY
+RENAME CONSTRAINT SYS_C008334 TO DEPT_ID_PK;
+
+/*
+3. 테이블명 변경
+ALTER TABLE 기존 테이블명 RENAME TO 변경할 테이블명;
+  (또는)     RENAME 기존 테이블명 TO 변경할 테이블명;
+*/
+ALTER TABLE DEPT_COPY RENAME TO DEPT_TEST;
+SELECT * FROM DEPT_TEST;
+
+/*
+DROP
+-객체를 삭제하는 구문
+*/
+DROP TABLE DEPT_TEST;
+
+--참조되고 있는 부모 테이블은 함부로 삭제되지 않는다.
+DROP TABLE BOOK;
+
+--만약 삭제하고자 한다면
+--방법1. 부모 테이블 삭제 시 제약조건까지 같이 삭제
+DROP TABLE BOOK CASCADE CONSTRAINT;
+
+
+--방법2. 자식 테이블 먼저 삭제 후 부모 테이블 삭제
+DROP TABLE RENT; --자식 테이블
+DROP TABLE MEMBER; --부모 테이블
+
+/*
+TRUNCATE 
+-테이블 구조는 유지, 데이터만 삭제하는 구문
+*/
+TRUNCATE TABLE DEPT_COPY; --Table DEPT_COPY이(가) 잘렸습니다.
+SELECT * FROM DEPT_COPY;
