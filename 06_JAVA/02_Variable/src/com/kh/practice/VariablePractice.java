@@ -70,9 +70,13 @@ public class VariablePractice {
 	 * 나누기 몫 : 3
 	 * */
 	public void method3() {
-		int iNum1 = 23;
-		int iNum2 = 7;
-		System.out.printf("%d과 %d의 합은 %d, 차는 %d, 곱은 %d, 나누기한 몫은 %d \n", iNum1, iNum2, iNum1+iNum2, iNum1-iNum2, iNum1*iNum2, iNum1/iNum2);
+//		
+		System.out.print("첫번째 정수를 입력하시오 > ");
+		int iNum1 = sc.nextInt();
+		System.out.print("첫번째 정수를 입력하시오 > ");
+		int iNum2 = sc.nextInt();
+		System.out.printf("더하기 : %d, \n빼기 : %d \n곱하기 : %d \n나누기 몫 : %d \n", iNum1+iNum2, iNum1-iNum2, iNum1*iNum2, iNum1/iNum2);
+		
 	}
 
 	/*
@@ -86,10 +90,12 @@ public class VariablePractice {
 	 * 둘레 : 110.4
 	 * */
 	public void method4() {
-		double width = 13.5;
-		double height = 41.7;
-		System.out.println("(사각형의 면적)=" + width*height);
-		System.out.println("(사각형의 둘레)=" + 2*(width+height));
+		
+		System.out.print("가로의 길이를 입력하세요. > ");
+		double width = sc.nextDouble();
+		System.out.print("세로의 길이를 입력하세요. > ");
+		double height = sc.nextDouble();
+		System.out.printf("가로 : %.1f \n세로 : %.1f \n(사각형의 면적)=%.2f \n(사각형의 둘레)=%.1f \n", width, height, width*height, 2*(width+height));
 
 	}
 
@@ -102,12 +108,17 @@ public class VariablePractice {
 	 * 마지막 문자 : e
 	 * */
 	public void method5() {
-		String apple = "apple";
-		int first = apple.length(); //5
-		System.out.printf("첫번째 문자 : %.1s \n", apple);
-		System.out.printf("두번째 문자 : %.2s \n", apple);
-		System.out.printf("마지막 문자 : %.5s \n", apple);
-// 잘 모르겠어요 ㅠ
+		System.out.print("문자열을 입력하세요. > ");
+		String word = sc.nextLine();
+		char firstWord = word.charAt(0);
+		System.out.println("첫번째 문자 : " + firstWord);
+		char secondWord = word.charAt(1);
+		System.out.println("두번째 문자 : " + secondWord);
+		char lastWord = word.charAt(word.length()-1);
+		System.out.println("세번째 문자 : " + lastWord);
+
+		
+
 	}
 
 	/*
@@ -118,10 +129,10 @@ public class VariablePractice {
 	 * B unicode : 66
 	 * */
 	public void method6() {
-		int A = 'A';
-		System.out.println("A unicode : " + A); //65
-		int B = 'B';
-		System.out.println("B unicode : " + B); //66
+		System.out.println("문자 하나를 입력하세요. > ");
+		char ch = sc.nextLine().charAt(0);
+		System.out.println(ch + " unicode : " + (int) ch);
+		
 
 	}
 	
@@ -135,13 +146,14 @@ public class VariablePractice {
 	 * 평균 : 72.67
 	 * */
 	public void method7() {
-		int kor =  75;
-		int eng =  63;
-		int mth =  80;
-		int total = kor+eng+mth;
-		int avg = total/3;
-				
-		System.out.printf("총점은 %d, 평균은 %d", total, avg);
+		System.out.println("국어 점수를 입력하세요. > ");
+		double kor = sc.nextInt();
+		System.out.println("영어 점수를 입력하세요. > ");
+		double eng = sc.nextInt();
+		System.out.println("수학 점수를 입력하세요. > ");
+		double mth = sc.nextInt();
+		System.out.printf("총점은 %f, 평균은 %.2f", kor + eng + mth, ((kor + eng + mth)/3) );
+		
 
 	}
 
