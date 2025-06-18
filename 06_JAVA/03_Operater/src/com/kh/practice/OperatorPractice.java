@@ -9,13 +9,13 @@ public class OperatorPractice {
 	public static void main(String[] args) {
 
 		OperatorPractice o = new OperatorPractice();
-		o.method1();
-		o.method2();
-		o.method3();
-		o.method4();
-		o.method5();
-		o.method6();
-		o.method7();
+//		o.method1();
+//		o.method2();
+//		o.method3();
+//		o.method4();
+//		o.method5();
+//		o.method6();
+//		o.method7();
 		o.method8();
 		
 	}
@@ -27,7 +27,10 @@ public class OperatorPractice {
 		int count = sc.nextInt();
 		System.out.print("연필 개수 > ");
 		int pencil = sc.nextInt();
-		System.out.printf("1인당 연필 개수 : %d \n남은 연필 개수 : %d", pencil / count, pencil % count);
+		System.out.printf("1인당 연필 개수 : %d \n"
+				        + "남은 연필 개수 : %d"
+				        , pencil / count
+				        , pencil % count);
 	}
 	
 	//입력 받은 숫자를 산술 연산자만 사용해서 십의 자리 이하는 버리는 코드를 작성하세요.
@@ -35,7 +38,8 @@ public class OperatorPractice {
 	public void method2() {
 		System.out.print("숫자를 입력하세요. > ");
 		int num = sc.nextInt();
-		System.out.printf("%d", num - num%100);
+		System.out.printf("%d \n", num - num % 100);
+		System.out.printf("%d \n", (num / 100) * 100);
 		
 	}
 
@@ -61,7 +65,7 @@ public class OperatorPractice {
 
 	//주민번호(-포함)를 입력받아 남자인지 여자인지 구분하여 출력하세요
 	public void method5() {
-		System.out.print("주민번호 입력(-v포함) > ");
+		System.out.print("주민번호 입력(-포함) > ");
 		String no = sc.nextLine();
 		char noChar = no.charAt(7);
 		switch (noChar) {
@@ -73,7 +77,9 @@ public class OperatorPractice {
 		case '4' :
 		System.out.println("여자");
 		break;
-		default : System.out.print("사람이 아님");
+		default : System.out.println("사람이 아님");
+		
+		System.out.println(noChar == '1' || noChar == '3' ? "남자" : noChar == '2' || noChar == '4' ? "여자" : "잘못된 입력");
 		}	
 	}
 
@@ -82,9 +88,11 @@ public class OperatorPractice {
 	public void method6() {
 		System.out.print("나이 입력 > ");
 		int age = sc.nextInt();
-		if(age > 19) System.out.print("성인");
-		else if(age > 13) System.out.print("청소년");
-		else System.out.print("어린이");
+		if(age > 19) System.out.println("성인");
+		else if(age > 13) System.out.println("청소년");
+		else System.out.println("어린이");
+		// 또는
+		System.out.println(age > 19 ? "성인" : age > 13 ? "청소년" : "어린이");
 		
 	}
 
@@ -95,14 +103,21 @@ public class OperatorPractice {
 		int apple = sc.nextInt();
 		System.out.print("바구니 크기 > ");
 		int basket = sc.nextInt();
-		System.out.print("필요한 바구니의 수 : " + apple / basket);
+		if(apple%basket==0) System.out.println("필요한 바구니의 수 : " + apple / basket);
+		else System.out.println("필요한 바구니의 수 : " + (apple / basket + 1) );
+		// 또는
+		System.out.println(apple % basket == 0 ? (apple / basket)+" 바구니" : (apple / basket + 1) +" 바구니");
+		
 	}
 	
 	//초 단위 시간을 입력받아 1시간 1분 1초 형식으로 출력
 	public void method8() {
 		System.out.print("초 단위 시간 입력 > ");
-		int sec = sc.nextInt();
-		System.out.print(sec/3600 + "시간 " + (sec%3600)/60 + "분 " + sec%60 + "초");
+		int second = sc.nextInt();
+		int hour = second / 3600;
+		int min = (second % 3600) / 60 ;
+		int sec = second % 60;
+		System.out.print(hour + "시간 " + min + "분 " + sec + "초");
 	}
 	
 }

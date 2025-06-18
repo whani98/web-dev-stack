@@ -8,12 +8,12 @@ public class VariablePractice {
 	
 	public static void main(String[] args) {
 		VariablePractice v = new VariablePractice();
-		v.method1();
-		v.method2();
-		v.method3();
-		v.method4();
-		v.method5();
-		v.method6();
+//		v.method1();
+//		v.method2();
+//		v.method3();
+//		v.method4();
+//		v.method5();
+//		v.method6();
 		v.method7();
 	}
 	
@@ -46,13 +46,19 @@ public class VariablePractice {
 		int z = 9;
 		
 		// 코드 적어주세요!
-		System.out.printf("\n x=%d \n y=%d \n x=%d  \n", y, z, x);
+		int temp = x;
+		x = y;
+		y = z;
+		z = temp;
 		
-		/*
+		System.out.printf("\n x=%d \n y=%d \n x=%d  \n", x, y, z);
+		
+		 /*
 		 * 또는
-		 *System.out.println("x=", y);
-		 *System.out.println("y=", z);
-		 *System.out.println("z=", x);
+		 *System.out.println("x=" + y);
+		 *System.out.println("y=" + z);
+		 *System.out.println("z=" + x);
+		 *
 		 * */
 
 	}
@@ -69,13 +75,17 @@ public class VariablePractice {
 	 * 곱하기 : 161
 	 * 나누기 몫 : 3
 	 * */
+	
+	// 코드 정렬 : 내가 정렬하고자 하는 부분 선택 후 ctrl + shift + f
+	 
 	public void method3() {
 //		
 		System.out.print("첫번째 정수를 입력하시오 > ");
-		int iNum1 = sc.nextInt();
-		System.out.print("첫번째 정수를 입력하시오 > ");
+		int iNum1 = sc.nextInt(); //Integer.parseInt(sc.nextLine()); 써도 가능
+		System.out.print("두번째 정수를 입력하시오 > ");
 		int iNum2 = sc.nextInt();
-		System.out.printf("더하기 : %d, \n빼기 : %d \n곱하기 : %d \n나누기 몫 : %d \n", iNum1+iNum2, iNum1-iNum2, iNum1*iNum2, iNum1/iNum2);
+		System.out.printf("더하기 : %d, \n빼기 : %d \n곱하기 : %d \n나누기 몫 : %d \n"
+				          , iNum1 + iNum2, iNum1 - iNum2, iNum1 * iNum2, iNum1 / iNum2);
 		
 	}
 
@@ -92,10 +102,17 @@ public class VariablePractice {
 	public void method4() {
 		
 		System.out.print("가로의 길이를 입력하세요. > ");
-		double width = sc.nextDouble();
+		double width = sc.nextDouble(); //Double.parseDouble(sc.nextLine());
 		System.out.print("세로의 길이를 입력하세요. > ");
-		double height = sc.nextDouble();
-		System.out.printf("가로 : %.1f \n세로 : %.1f \n(사각형의 면적)=%.2f \n(사각형의 둘레)=%.1f \n", width, height, width*height, 2*(width+height));
+		double height = sc.nextDouble(); //Double.parseDouble(sc.nextLine());
+		double area = width * height;
+		double size = 2 * (width + height);
+		System.out.printf("가로 : %.1f \n"
+				        + "세로 : %.1f \n"
+				        + "(사각형의 면적)=%.2f \n"
+				        + "(사각형의 둘레)=%.1f \n"
+				, width, height, area, size);
+		//System.out.println("둘레 : " + String.format("%.1f", size));
 
 	}
 
@@ -111,11 +128,17 @@ public class VariablePractice {
 		System.out.print("문자열을 입력하세요. > ");
 		String word = sc.nextLine();
 		char firstWord = word.charAt(0);
-		System.out.println("첫번째 문자 : " + firstWord);
+		System.out.println("첫번째 문자 : " + firstWord); // System.out.println(word.charAt(0));
 		char secondWord = word.charAt(1);
-		System.out.println("두번째 문자 : " + secondWord);
+		System.out.println("두번째 문자 : " + secondWord); // System.out.println(word.charAt(1));
 		char lastWord = word.charAt(word.length()-1);
-		System.out.println("세번째 문자 : " + lastWord);
+		System.out.println("세번째 문자 : " + lastWord); // System.out.println(word.charAt(length()-1));
+		
+		
+		
+		
+
+
 
 		
 
@@ -130,8 +153,9 @@ public class VariablePractice {
 	 * */
 	public void method6() {
 		System.out.println("문자 하나를 입력하세요. > ");
-		char ch = sc.nextLine().charAt(0);
+		char ch = sc.nextLine().charAt(0); // int num = 'A'; // 65
 		System.out.println(ch + " unicode : " + (int) ch);
+		System.out.println((char)((int)ch+1) + " unicode : " + ((int) ch +1));
 		
 
 	}
@@ -147,12 +171,13 @@ public class VariablePractice {
 	 * */
 	public void method7() {
 		System.out.println("국어 점수를 입력하세요. > ");
-		double kor = sc.nextInt();
+		int kor = sc.nextInt();
 		System.out.println("영어 점수를 입력하세요. > ");
-		double eng = sc.nextInt();
+		int eng = sc.nextInt();
 		System.out.println("수학 점수를 입력하세요. > ");
-		double mth = sc.nextInt();
-		System.out.printf("총점은 %f, 평균은 %.2f", kor + eng + mth, ((kor + eng + mth)/3) );
+		int mth = sc.nextInt();
+		int total =  kor + eng + mth;
+		System.out.printf("총점은 %d, 평균은 %.2f", total, (double)((total)/3) );
 		
 
 	}
