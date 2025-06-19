@@ -11,10 +11,10 @@ class LoopPractice {
 
 		LoopPractice l = new LoopPractice();
 //		l.method1();
-//		l.method2();
+		l.method2(); 
 //		l.method3();
-		l.method4();
-		l.method5();
+//		l.method4();
+//		l.method5();
 		l.method6();
 		
 	}
@@ -36,12 +36,21 @@ class LoopPractice {
 
     }
 
-    // 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
+    //** 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
-    	
+    	int num = 1;
+    	int sum = 0;
+    	while(true) {
+    	++num;
+    	if(num%2==0) {num = (-1)*(num + 1);}
+    	else {num = num + 1;}
+    	sum += num;
+    	System.out.println(sum);
+    	if (sum >= 100);break;
+    	}
     }
 
-    /*
+    /* 
         사용자로부터 문자열을 입력 받고 문자열에서 검색될 문자를 입력 받아 해당 문자열에 그 문자가 몇 개 있는지 개수를 출력하세요. 
 
         문자열 : banana
@@ -50,6 +59,21 @@ class LoopPractice {
 
     */
     public void method3() {
+    	System.out.print("문자열 입력 > ");
+    	String str = sc.nextLine();
+    	
+    	System.out.print("검색될 문자 > ");
+    	String word = sc.nextLine();
+    	char charWord = word.charAt(0);
+    	int count = 0;
+    	for(int i=0; i<=(str.length()-1); i++) {
+    		char charStr = str.charAt(i);
+    		
+    	if (charStr==charWord) {
+    		++count;
+    		}
+    	}System.out.println(str + "안에 포함된 " + word +" 개수 : " + count);
+    	
 
     }
 
@@ -64,11 +88,10 @@ class LoopPractice {
         0
      */
     public void method4() {
-    	int random =  (int)Math.random()*10+1;
     	while (true) {
-        if (random != 0) {
-    	System.out.println(random);}
-        else if (random == 0); break;
+    	int random =  (int) (Math.random()*11);
+    	System.out.println(random);
+        if (random == 0) break;
     	}
 
     }
@@ -85,6 +108,32 @@ class LoopPractice {
 
      */
     public void method5() {
+    	for(int i = 1; i <= 10; i++) {
+    	int random = (int) (Math.random()*6)+1; // 주사위
+    	int result1 = 0;
+    	int result2 = 0;
+    	int result3 = 0;
+    	int result4 = 0;
+    	int result5 = 0;
+    	int result6 = 0;
+    	switch (random) {
+    	case 1 : ++result1; break;
+    	case 2 : ++result2; break;
+    	case 3 : ++result3; break;
+    	case 4 : ++result4; break;
+    	case 5 : ++result5; break;
+    	case 6 : ++result6; break;
+    	
+    	
+    	}System.out.println("1 : " + result1);
+    	System.out.println("2 : " + result2);
+    	System.out.println("3 : " + result3);
+    	System.out.println("4 : " + result4);
+    	System.out.println("5 : " + result5);
+    	System.out.println("6 : " + result6);
+    	
+    	}
+    	
     	
     }
 
