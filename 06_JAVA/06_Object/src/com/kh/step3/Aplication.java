@@ -29,6 +29,8 @@ public class Aplication {
 		
 		
 		System.out.println(Calculator.divide(45, 4));
+		System.out.println(c.factorial(10));
+		System.out.println(c.factorial2(5));
 	}
 
 }
