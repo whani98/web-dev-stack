@@ -1,6 +1,6 @@
 package com.kh.practice2.model;
 
-public class Snack {
+public class Snack { // 클래스
 
 	private String kind;
 	private String name;
@@ -8,7 +8,7 @@ public class Snack {
 	private int numOf;
 	private int price;
 
-	public Snack() {
+	public Snack() { // alt + shift + s 기본 생성자
 	}
 
 	public Snack(String kind, String name, String flavor, int numOf, int price) {
@@ -20,11 +20,11 @@ public class Snack {
 
 	}
 
-	public String getKind() {
+	public String getKind() { // alt + shift + s  getter setter
 		return kind;
 	}
 
-	public void setKind(String kind) {
+	public void setKind(String kind) { // alt + shift + s 필드 제작
 		this.kind = kind;
 	}
 
@@ -61,7 +61,7 @@ public class Snack {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { // alt + shift + s  toString
 		return "Snack [kind=" + kind + ", name=" + name + ", flavor=" + flavor + ", numOf=" + numOf + ", price=" + price
 				+ "]";
 	}
