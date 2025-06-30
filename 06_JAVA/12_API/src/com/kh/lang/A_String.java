@@ -9,19 +9,30 @@ public class A_String {
 	
 	/*
 	 * String 클래스
-	 * - 불변의 클래스(객체 생성하면 변경X)
+	 * - 불변의 클래스 (객체 생성하면 변경 X)
+	 * - 변경이 적고 읽기가 많은 경우에 사용하는 것이 좋다.
+	 * - new 없이도 객체를 생성할 수 있는 유일한 객체
 	 * */
 	public void method1() {
 		String str1 = "hello";
-		String str2 = "hello";
-
+		String str2 = "hello"; 
+		String str3 = new String("hello");
+		String str4 = new String("hello");
+		
+		System.out.println("str1 == str2 : " + (str1 == str2)); // true
+		System.out.println("str3 == str4 : " + (str3 == str4)); // false
+		System.out.println("str1 == str3 : " + (str1 == str3)); // false
+		
+		System.out.println("str1.equals(str2) : " + (str1.equals(str2))); // true
+		System.out.println("str3.equals(str4) : " + (str3.equals(str4))); // true
+		System.out.println("str1.equals(str3) : " + (str1.equals(str3))); // true
 	}
 
 	public void method2() {
 		// 1. charAt(int index) : char
-		// 전달받은 index 위치의 하나의 문자만
+		// 전달받은 index 위치의 하나의 문자만 추출해서 리턴
 		String str = "Hello, Java!";
-		char str1 = str.charAt(2);
+		char str1 = str.charAt(3);
 		System.out.println("1. charAt : " + str1);
 
 		// 2. concat(String str) : string
