@@ -90,15 +90,18 @@ public class MusicController {
 		}
 		return null;
 	}
-	public ArrayList<Music> descArtist() {
-		ArrayList<Music> clone = (ArrayList<Music>) list.clone();
- 		Collections.sort(clone, new SongAscending());
-		return clone;
-	}
-	public ArrayList<Music> ascSong() {
-		ArrayList<Music> clone = (ArrayList<Music>) list.clone();
- 		Collections.sort(clone, new SongAscending());
-		return clone;
-	}
+	// 가수명 내림차순
+		public ArrayList<Music> descArtist() {
+			ArrayList<Music> clone = (ArrayList<Music>) list.clone();
+			Collections.sort(clone);
+			return clone;
+		}
+		
+		// 곡명 오름차순
+		public ArrayList<Music> ascSong() {
+			ArrayList<Music> clone = (ArrayList<Music>) list.clone();
+			Collections.sort(clone, new SongAscending());
+			return clone;
+		}
 	
 }
