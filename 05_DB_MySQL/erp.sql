@@ -171,13 +171,13 @@ FOREIGN KEY (PRO_NO) REFERENCES PROJECT(PRO_NO);
 
 /*일정관리!*/
 CREATE TABLE PROJECT_SCHEDULES (
-    TASK_NO INT AUTO_INCREMENT PRIMARY KEY, --작업 항목 아이디
-    TASK_NAME VARCHAR(100), --작업 항목 이름
-    START_DATE, --작업 시작 날짜
-    END_DATE, --작업 마감 날짜
-    USER_NO INT NOT NULL, --작업자 아이디
-    USER_NAME VARCHAR(50), --작업자 이름
-    ESTIMATED_DAYS DATE,--소요시간
+    TASK_NO INT AUTO_INCREMENT PRIMARY KEY, -- 작업 항목 아이디
+    TASK_NAME VARCHAR(100), -- 작업 항목 이름
+    START_DATE, -- 작업 시작 날짜
+    END_DATE, -- 작업 마감 날짜
+    USER_NO INT NOT NULL, -- 작업자 아이디
+    USER_NAME VARCHAR(50), -- 작업자 이름
+    ESTIMATED_DAYS DATE,-- 소요시간
     STATUS VARCHAR(50) CHECK(STATUS IN ('진행전', '진행중', '완료', '중단')), --진행 상태
     NOTE TEXT --참고메모
 );
@@ -204,22 +204,22 @@ CREATE TABLE SCHEDUE_MEMBERS (
    USER_NO INT,
    SCHEDULE_NO INT
    );
---SCHEDULE : PRO_NO, TASK_NO, USER_NO
+-- SCHEDULE : PRO_NO, TASK_NO, USER_NO
 ALTER TABLE SCHEDULE ADD
 FOREIGN KEY(PRO_NO)
---SCHEDLUE_MEMBERS : SCHEDULE_NO
+-- SCHEDLUE_MEMBERS : SCHEDULE_NO
 
---고객관계관리, 인적자원관리, 재무관리, 품질보증관리
---가장 해볼만하다 싶은거 1개만 해도 괜찮고, 아이디어 있으면 여러개 해도 무방!
+-- 고객관계관리, 인적자원관리, 재무관리, 품질보증관리
+-- 가장 해볼만하다 싶은거 1개만 해도 괜찮고, 아이디어 있으면 여러개 해도 무방!
 
 /*
 고객관계관리
--고객 기본정보
+- 고객 기본정보
 고객번호
 고객이름
 고객 성별
 고객 생년월일
-고객 전화번호
+고객 전화 번호
 고객 주소
 고객 담당자 번호
 고객 등급
@@ -255,3 +255,8 @@ CREATE TABLE CUSTOMER_ACTIVITY (
    PURCHASE_TOTAL INT, -- 총 구매 금액
 );
 
+-- 인적자원관리 : 연차, 인사평가, 출퇴근
+
+CREATE TABLE (
+   
+);
