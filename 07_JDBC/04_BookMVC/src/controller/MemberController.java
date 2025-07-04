@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import dao.MemberDAO;
 import vo.Member;
@@ -9,18 +10,35 @@ import vo.Member;
 public class MemberController {
 
 	private MemberDAO dao = MemberDAO.getInstance();
-	// 4. 회원가입
-	public void register(Member member){
 
+	// 4. 회원가입
+	public String register(Member member) {
+		try {
+			dao.register(member);
+			return member.getName() + "님이 회원가입하셨습니다!";
+		} catch (SQLException e) {
+			return "중복 아이디입니다! 다른 아이디로 가입해주세요.";
+		}
 	}
-	
+
 	// 5. 로그인
 	public Member login(String id, String pwd) {
-		return null;
+		try {
+			return dao.login(id, pwd);
+		} catch (SQLException e) {
+			return null;
+		}
+
 	}
-	
+
 	// 6. 회원탈퇴
-	public void delete(String id) {
+	public boolean delete(String id) {
 		// 회원 탈퇴시 대여 중인 책을 모두 기록 삭제
+		try {
+			dao.delete(id);
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 }

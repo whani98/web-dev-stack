@@ -17,32 +17,34 @@ public class BookController {
 		} catch (SQLException e) {
 			return null;
 		}
-		
-		
+
 	}
 	
 	// 2. 책 등록
 	public boolean registerBook(String title, String author, int accessAge) {
 		// 기존 제목, 저자, 제한 나이까지 동일한 책이 있으면 등록 안되도록
 		try {
-			boolean check = dao.checkBook(title, author, accessAge);
+			if(dao.checkBook(title, author, accessAge)) {
+				return false;
+			}
+			dao.registerBook(title, author, accessAge);
+			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 	
 	// 3. 책 삭제
-	public boolean sellBook(int bookNo) {
+	public boolean sellBook(String title) {
 		// 대출된 책은 삭제 못하도록
 		try {
-			if(dao.sellBook(bookNo)) {
-				return true;
-			}
+			int result = dao.sellBook(dao.searchBook(title));
+			if(result==1) return true;
+			return false;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
+		
 	}
 	
 	

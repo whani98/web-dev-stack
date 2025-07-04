@@ -1,5 +1,6 @@
 package vo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,6 @@ public class Rent {
 	private int bookNo; // fk (Book)
 	private LocalDate rentDate;
 	
-	private Member member;
+//	private Member member;
 	private Book book;
 }
