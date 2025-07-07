@@ -90,7 +90,7 @@ public class BookDAO {
 	public int searchBook(String title) throws SQLException {
 		Connection connect = connect();
 
-		String query = "SELECT * FROM book WHERE title = ?";
+		String query = "SELECT book_no FROM book WHERE title = ?";
 		PreparedStatement ps = connect.prepareStatement(query);
 		ps.setString(1, title);
 
@@ -107,8 +107,6 @@ public class BookDAO {
 		String query = "DELETE FROM book WHERE book_no = ?";
 		PreparedStatement ps = connect.prepareStatement(query);
 		ps.setInt(1, bookNo);
-		ps.executeUpdate();
-
 		return ps.executeUpdate();
 	}
 
