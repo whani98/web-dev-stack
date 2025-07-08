@@ -1,14 +1,4 @@
-<!-- HTML 주석 : 소스코드에 보여짐-->
-<%--  JSP 주석 : 소스코드에 안보임
-
-JSP Element
-1. 지시어 %@ % : 컨테이너에게 알려줄 내용 지정
-2. 스클릿틀릿 % % : 자바코드는 이 안에 지정
-3. 출력문 %= % : 출력하는 내용 지정(값만 출력)
-
---%>
 <%@page import="vo.Member"%>
-<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +8,7 @@ JSP Element
 <title>Insert title here</title>
 </head>
 <body>
-    <%
+	<%
 	Member member = (Member) request.getAttribute("member");%>
 	<% if(member!=null){ %>
 	<h1>회원 정보</h1>
@@ -30,6 +20,5 @@ JSP Element
 	<% }else { %>
 	<h1>회원 정보가 없습니다.</h1>
 	<% } %>
-    
 </body>
 </html>
