@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDAO"%>
 <%@page import="vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,16 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>회원 정보</h1>
 <% Member member = (Member) request.getAttribute("member");%>
-	<% if(member!=null){ %>
-	<h1>회원 정보</h1>
 	<ul>
 	   <li>아이디 : <%=member.getId() %></li>
 	   <li>이름 : <%=member.getName() %></li>
 	   <li>나이 : <%=member.getAge() %></li>
 	</ul>
-	<% }else { %>
-	<h1>회원 정보가 없습니다.</h1>
-	<% } %>
+	<a href="/">메인 페이지로 이동</a>
+	
 </body>
 </html>

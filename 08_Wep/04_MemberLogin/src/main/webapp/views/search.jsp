@@ -16,7 +16,7 @@
              실패하면 "검색에 실패했습니다" --%>
              
              <h2>회원 조회</h2>
-         	<form action="search">
+         	<form action="/search" method="get">
          		검색할 회원 아이디 : <input type="text" name="id"> 
          		<input type="submit" value="조회">
          	</form>
