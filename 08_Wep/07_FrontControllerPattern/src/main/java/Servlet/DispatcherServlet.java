@@ -66,6 +66,7 @@ public class DispatcherServlet extends HttpServlet {
 		return "index.jsp";
 
 	}
+	
 	protected String register(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
@@ -77,14 +78,16 @@ public class DispatcherServlet extends HttpServlet {
 		
 		return "index.jsp";
 	}
+	
 	protected String search(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		String id = request.getParameter("id");
 		
 		MemberDAO dao = new MemberDAO();
 		Member member= dao.search(id);
-		
+		request.setAttribute("member", member);		
 		return "/views/result.jsp";
 	}
+	
 	protected String allMember(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		MemberDAO dao = new MemberDAO();
 		List<Member> list = dao.allMember();
