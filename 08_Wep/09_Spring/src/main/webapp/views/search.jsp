@@ -8,8 +8,7 @@
 </head>
 <body>
 	<h1>회원검색</h1>
-	<form action="/search.do" method="get">
-		<input type="hidden" name="command" value="search">
+	<form action="/find" method="get">
 		검색할 아이디 : <input type="text" name="id"><br>
 		<input type="submit" value="검색">
 	</form>
