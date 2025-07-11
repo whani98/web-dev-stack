@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.kh.vo.Member;
 
+@Repository
 public class MemberDAO {
 	
 	public MemberDAO() {
