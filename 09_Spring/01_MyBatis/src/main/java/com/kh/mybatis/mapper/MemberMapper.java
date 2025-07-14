@@ -1,0 +1,17 @@
+package com.kh.mybatis.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.kh.mybatis.model.vo.Member;
+
+// 기존 DAO 역할
+
+@Mapper 
+public interface MemberMapper {
+	void register(Member vo);
+	Member login(Member vo);
+	List<Member> allMember();
+	void update(Member vo);
+}
