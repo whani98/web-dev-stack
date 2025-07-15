@@ -14,6 +14,7 @@
 	       <a href="/register">회원가입</a><br>
 	       <a href="/login">로그인</a>
 	    </c:when>
+		
 		<c:otherwise>
 	       <h2>${member.name}님 로그인 하셨습니다.</h2>
 		   <!--로그인한 사람의 정보 수정-->
@@ -23,10 +24,27 @@
 		나이 : <input type="text" name="age" value=${member.age}><br>
 		<input type="submit" value="회원수정">	
 	</form>
+	<h2>비밀번호만 변경</h2>
+	<form action="/update" method="post">
+		비밀번호 : <input type="password" name="pwd"><br>
+		<input type="submit" value="비밀번호 수정">
+	</form>
+	<!-- primary key가 아이디-->
+	<a href="/delete">회원탈퇴</a>
 	    </c:otherwise>
 	</c:choose>
+	
+	<form action="/search">
+		<select name="select">
+			<option value="all">이름 또는 아이디</option>
+			<option value="id">아이디</option>
+			<option value="name">이름</option>
+		</select>
+		<input type="text" name="keyword" placeholder="입력" value="${param.keyword}">
+		<input type="submit" value="검색">
+		
+	</form>
 	<!-- 회원 전체 목록이 나오고-->
-	<h1>전체 리스트</h1>
 		<table border="1">
 				<th>아이디</th>
 				<th>비밀번호</th>
