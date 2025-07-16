@@ -39,17 +39,20 @@
 			<option value="all">이름 또는 아이디</option>
 			<option value="id">아이디</option>
 			<option value="name">이름</option>
+			
 		</select>
 		<input type="text" name="keyword" placeholder="입력" value="${param.keyword}">
 		<input type="submit" value="검색">
 		
 	</form>
 	<!-- 회원 전체 목록이 나오고-->
+	<form action="/delete" method="post">
 		<table border="1">
 				<th>아이디</th>
 				<th>비밀번호</th>
 				<th>이름</th>
 				<th>나이</th>
+				<th>삭제</th>
 			</tr>
 			<c:forEach items="${list}" var="item">
 			<tr>
@@ -57,8 +60,11 @@
 				   <td>${item.pwd}</td>
 				   <td>${item.name}</td>
 				   <td>${item.age}</td>
+				   <td><input type="checkbox" name="idList" value="${item.id}"></td>
 			</tr>
 			</c:forEach>
 		 </table>
+		 <input type="submit" value="삭제">
+	</form>
 </body>
 </html>
