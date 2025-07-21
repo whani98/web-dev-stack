@@ -5,46 +5,41 @@
 <html>
 <head>
 <title>Ajax</title>
-<script src=https://code.jquery.com/jquery-3.7.1.min.js></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	
 	<h1>Encoding 처리하기</h1>
 	닉네임 : <input type="text" id="nick">
 	<input type="button" id="btn" value="닉네임 보내기">
 	<p id="result"></p>
 	
-	<!-- get / encoding-->
+	<!-- get, /encoding -->
 	<!--<script>
-		
 		let xhr;
-		function startRequest() {  // 요청에 해당하는 로직을 담는 메서드
-		    const nickname = document.querySelector("#nick").value;
+		function startRequest() { // 요청에 해당하는 로직을 담는 메서드
+			const nickname = document.querySelector("#nick").value;
 			xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = callback;
 			xhr.open("get", "/encoding?nickname=" + nickname);
-			xhr.send(null);
+			xhr.send(null); // 이때 서버로 전송.. 실질적인 요청이 들어감!
 		}
 		
 		function callback() { // 응답에 해당하는 로직을 담는 메서드
-			if(xhr.readyState === 4){
-				if(xhr.status === 200 ){
-					//alert(xhr.responseText); 
-					const nickname =xhr.responseText;
+			if(xhr.readyState === 4) {
+				if(xhr.status === 200) {
+					//alert(xhr.responseText);
+					const nickname = xhr.responseText;
 					document.querySelector("#result").innerHTML = nickname;
-							}
-						}
+				}
+			}
 		}
 		const btn = document.querySelector("#btn");
 		btn.addEventListener("click", startRequest);
-		} 
-		
-	}
 	</script>-->
 	
-	<!-- jQuery-->
+	<!--jQuery-->
 	<script>
-		$("#btn").click(()=>{
+		$("#btn").click(() => {
 			const nickname = $("#nick").val();
 			$.ajax({
 				// 요청
