@@ -24,15 +24,16 @@ public class FilmController{
 	
 	// 2
 	@GetMapping("/list")// list.jsp를 뜻한다!
-	public String list(Model model, PagingDTO paging, int total) {//4 모델에 담음
+	public String list(Model model, PagingDTO paging) {//4 모델에 담음
 		System.out.println(paging);
         // 3 System.out.println("호출!"); 호출 되는지 확인
 		// 5 service와 파라미터 동일하게!
 		List<Film> list = service.showFilm(paging);
 		model.addAttribute("list", list);
-		model.addAttribute("paging", new PagingDTO(paging.getPage(), );
+		model.addAttribute("paging", new PagingDTO(paging.getPage(), service.total()));
         // System.out.println(list);
 		// list.jsp에서 list가 필요
 		return "list";//2 
 	}
+
 }

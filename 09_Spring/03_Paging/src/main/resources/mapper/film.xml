@@ -7,11 +7,11 @@
         <result property="desc" column="description"/>
     </resultMap>
     
-<select id="showFilm" parameterType="Film" resultMap="filmMap">
-SELECT * FROM film_text LIMIT #{offset}, #{limit}
-</select>
-<select id="total" resultType="int">
-SELECT count(*) FROM film_text 
-</select>
+    <select id="showFilm" parameterType="Film" resultMap="filmMap">
+        SELECT * FROM film_text LIMIT #{offset}, #{limit}
+    </select>
+    <select id="total" resultType="int">
+        SELECT count(*) FROM film_text 
+    </select>
 
 </mapper>

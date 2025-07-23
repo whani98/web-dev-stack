@@ -28,5 +28,9 @@ public class FilmService implements FilmMapper{
 		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		return mapper.showFilm(paging);
 	}
+	@Override
+	public int total() {
+		return mapper.total();
+	}
 
 }
