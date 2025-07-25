@@ -6,8 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>파일 업로드</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+	
+	<!-- list.jsp-->
+	<a href="/list">게시판 글 목록</a>
+	
 	<h2>File Upload Test</h2>
 	<form action="/upload" method="post" enctype="multipart/form-data">
 		<input type="file" name="file"><br>
@@ -18,6 +23,68 @@
 	<form action="/multiUpload" method="post" enctype="multipart/form-data">
 			<input type="file" name="files" multiple accept="image/*"><br>
 			<input type="submit" value="파일업로드">
+	</form>
+	
+	
+	
+	<button id="open">모달 열기</button>
+	<div class="modal-bg">
+	   <div class="modal">
+		<button id="close">X</button>
+		<h3>파일업로드</h3>
+		<form action="/upload" method="post" enctype="multipart/form-data">
+				<input type="file" name="file"><br>
+				<input type="submit" value="파일업로드">
 		</form>
+	   </div>
+	</div>
+	
+	<style>
+		.modal-bg{
+			position: fixed;
+			top:0; left: 0; right: 0; bottom: 0;
+			background: rgba(0, 0, 0, 0.3);
+			z-index: 1000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.modal {
+			background: white;
+			position: relative;
+			width: 350px;
+			padding: 20px;
+		}
+		.modal #close {
+			position: absolute;
+			top: 10px; right: 10px;
+			cursor: pointer;
+			font-size: 10px;
+			border: none;
+			background: none;
+		}
+		
+	</style>
+	
+	<script>
+		// 모달 열기 버튼 클릭 => 배경이 flex상태로 변경(배경색과 모달창이 생김)
+		$('#open').click(() => {
+			$('.modal-bg').css('display', 'flex');
+		});
+		// 모달창에서 X버튼 클릭 => 배경색이 사라진 상태로 변경
+		$('#close').click(()=>{
+					$('.modal-bg').css('display', 'none');
+		});
+		// 모달창이 있는 상태에서 모달창이 아닌 배경만 클릭했을 경우
+		// 모달창만 사라지도록
+		// 이벤트 함수 사용
+		$('.modal-bg').click((e) => {
+			//console.log(e.target);// 현재 클릭한 이미지
+			//console.log(e.currentTarget);// 이벤트 걸린 본인
+			if(e.target == e.currentTarget){
+			$('.modal-bg').css('display', 'none');
+		}
+		})
+	</script>
 </body>
 </html>

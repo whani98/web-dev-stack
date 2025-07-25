@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import com.kh.upload.model.dto.BoardDTO;
+import com.kh.upload.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class BoardController {
 
+    private final BoardService boardService;
+
     private final CustomErrorController customErrorController;
 
-    BoardController(CustomErrorController customErrorController) {
+    BoardController(CustomErrorController customErrorController, BoardService boardService) {
         this.customErrorController = customErrorController;
+        this.boardService = boardService;
     }
 
 	@GetMapping("/")
@@ -62,4 +67,16 @@ public class BoardController {
 		}
 		return "redirect:/";
 	}
+	
+	@GetMapping("/list")
+	public String list() {
+		return "list";
+	}
+	
+	@PostMapping("/write")
+	public String write(BoardDTO dto) {
+		System.out.println(dto);
+		return "redirect:/list";
+	}
+	
 }
