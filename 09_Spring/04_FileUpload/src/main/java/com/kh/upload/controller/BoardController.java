@@ -2,12 +2,17 @@ package com.kh.upload.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import com.kh.upload.model.dto.BoardDTO;
+import com.kh.upload.model.vo.Board;
 import com.kh.upload.service.BoardService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,13 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class BoardController {
 
-    private final BoardService boardService;
+	@Autowired
+    private final BoardService service;
 
     private final CustomErrorController customErrorController;
 
-    BoardController(CustomErrorController customErrorController, BoardService boardService) {
+    BoardController(CustomErrorController customErrorController, BoardService service) {
         this.customErrorController = customErrorController;
-        this.boardService = boardService;
+        this.service = service;
     }
 
 	@GetMapping("/")
@@ -69,14 +75,47 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model) {
+		List<BoardDTO> list = service.boardAll();
+		model.addAttribute("list", list);
 		return "list";
 	}
 	
 	@PostMapping("/write")
 	public String write(BoardDTO dto) {
-		System.out.println(dto);
-		return "redirect:/list";
+//		*데이터 잘 들어가는지 확인할 때
+//		-파라미터가 String title, String content, MultipartFile file
+//		System.out.println(title);
+//		System.out.println(content);
+//		System.out.println(file);
+//		-파라미터가 BoardDTO dto
+//		System.out.println(dto);
+//		또는
+//		System.out.println(dto.getTitle());
+//		System.out.println(dto.getContent());
+//		System.out.println(dto.getFile());
+		
+		// 이미지 업로드 추가
+		String fileName = fileUpload(dto.getFile());
+		
+		// board 테이블에 데이터 추가 
+		Board vo = new Board();
+		vo.setTitle(dto.getTitle());
+		vo.setContent(dto.getContent());
+		vo.setUrl(fileName);
+		service.boardAdd(vo);
+		
+		System.out.println(vo);
+		
+		return "redirect:/view?no=" + vo.getNo();
 	}
-	
+	// /view?no=${board.no} -> view.jsp 데이터 보여주기
+	@GetMapping("/view")
+	public String view(int no, Model model) {
+//		System.out.println(no);
+		Board board = service.boardSearch(no);
+		model.addAttribute("board", board);
+		return "view";
+	}
+
 }

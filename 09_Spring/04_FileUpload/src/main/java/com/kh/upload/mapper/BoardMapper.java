@@ -15,5 +15,5 @@ public interface BoardMapper {
 	Board boardSearch(int no);
 	void boardUpdate(Board vo);
 	void boardDelete(int no);
-	void write(BoardDTO dto);
+	
 }

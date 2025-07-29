@@ -1,5 +1,8 @@
 package com.kh.upload.service;
 
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,38 +13,41 @@ import com.kh.upload.model.dto.BoardDTO;
 import com.kh.upload.model.vo.Board;
 
 @Service
-public class BoardService implements BoardMapper{
+public class BoardService {
 
 	@Autowired
 	private BoardMapper mapper;
-	@Override
+	
 	public void boardAdd(Board vo) {
 		mapper.boardAdd(vo);
 	}
 	
-	@Override
-	public List<Board> boardAll() {
-		return mapper.boardAll();
-	}
-
-	@Override
-	public void boardDelete(int no) {
-		mapper.boardDelete(no);
+	public List<BoardDTO> boardAll() {
+		List<Board> list = mapper.boardAll();
+		List<BoardDTO> dtoList = new ArrayList<BoardDTO>();
+		for(Board b : list) {
+			BoardDTO dto = new BoardDTO();
+			dto.setNo(b.getNo());
+			dto.setTitle(b.getTitle());
+			Date formatDate = Date.from(b.getCreatedAt().atZone(ZoneId.systemDefault()).toInstant());
+			dto.setFormatDate(formatDate);
+			dtoList.add(dto);
+		}
+		return dtoList;
 	}
 	
-	@Override
 	public Board boardSearch(int no) {
 		return mapper.boardSearch(no);
 	}
 	
-	@Override
-	public void boardUpdate(Board vo) {
-		mapper.boardUpdate(vo);
+	public void boardDelete(int no) {	
+		mapper.boardDelete(no);
 	}
 	
-	@Override
-	public void write(BoardDTO dto) {
-		mapper.write(dto);
+	
+	
+	public void boardUpdate(Board vo) {
+		mapper.boardUpdate(vo);
 	}
 	
 }
