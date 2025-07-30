@@ -2,7 +2,10 @@ package com.kh.upload.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class BoardController {
+	
+	private String path = "\\\\192.168.0.35\\upload\\";
 
 	@Autowired
     private final BoardService service;
@@ -45,7 +50,7 @@ public class BoardController {
 		
 		String fileName = uuid.toString() + "_" + file.getOriginalFilename();
 //		System.out.println(fileName);
-		File copyFile = new File("\\\\192.168.0.35\\upload\\" + fileName);
+		File copyFile = new File(path + fileName);
 		try {
 			file.transferTo(copyFile);
 		} catch (IllegalStateException | IOException e) {
@@ -117,5 +122,53 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "view";
 	}
+	
+	@PostMapping("/update")
+	public String update(BoardDTO dto) {
+//		System.out.println(dto); dto 잘 받는지 확인
+		// board 테이블에 데이터 수정 -> 기존 파일은 삭제하고 해당 파일을 업로드하고 DB url을 수정
+		
+		System.out.println(dto.getFile().isEmpty());
+		if(!dto.getFile().isEmpty()) {
+		// 1. 파일이 비어있지 않다면 기존 파일 삭제
+		File file = new File(path + dto.getUrl());
+		file.delete();
+		
+		// 2. 해당 파일 업로드 -> 새로운 파일의 url의 파일명
+		String url = fileUpload(dto.getFile());
+		dto.setUrl(url); // 새로운 파일의 url 넣기
+		}
+
+		// 3. 해당 no에 따른 데이터들 수정
+//		System.out.println(dto.getUrl()+","+ dto.getFile());
+		service.boardUpdate(dto);
+		return "redirect:/view?no=" + dto.getNo();
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int no, BoardDTO dto) {
+		// 이미지가 있는 경우 삭제
+		// 기존 url 컬럼에 값이 필요하지 않을까?
+		// no로 하나 정보 가지고 오는 기능
+		Board board = service.boardSearch(no);
+
+		File file = new File(path + dto.getUrl());
+		file.delete();
+		
+		service.boardDelete(no);
+		
+		return "redirect:/list";
+	}
+	
+	@GetMapping("/search")
+	public String search(Model model) {
+		//검색창에 입력한 값 받기
+//		List<BoardDTO> dtoList = service.boardSearch();
+//			model.addAttribute("search", dtoList);
+		
+		
+		return "list";
+	}
+	
 
 }

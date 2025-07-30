@@ -36,18 +36,20 @@ public class BoardService {
 		return dtoList;
 	}
 	
-	public Board boardSearch(int no) {
-		return mapper.boardSearch(no);
+	public void boardUpdate(BoardDTO dto) {
+		
+		mapper.boardUpdate(dto);
 	}
 	
 	public void boardDelete(int no) {	
 		mapper.boardDelete(no);
 	}
 	
-	
-	
-	public void boardUpdate(Board vo) {
-		mapper.boardUpdate(vo);
+	public Board boardSearch(int no) {
+		return mapper.boardSearch(no);
 	}
 	
+	public int total() {
+		return mapper.total();
+	}
 }

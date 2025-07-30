@@ -13,7 +13,7 @@ public interface BoardMapper {
 	void boardAdd(Board vo);
 	List<Board> boardAll();
 	Board boardSearch(int no);
-	void boardUpdate(Board vo);
+	void boardUpdate(BoardDTO dto);
 	void boardDelete(int no);
-	
+	int total();
 }

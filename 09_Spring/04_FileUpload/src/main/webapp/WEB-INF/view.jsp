@@ -15,23 +15,32 @@
 <!-- a링크를 통해 딱 해당 정보만 나올 수 있도록 상세보기-->
 <div class="container">
 		<h1>상세 정보</h1>
-		<table class="table">
-			<thead>
-				<tr>
-				   <th>제목</th>
-				   <th>콘텐츠</th>
-				   <th>이미지</th>
-				   <th>작성시간</th>
-				</tr>
-			</thead>
-			<tbody>
-					<tr>
-				      <td>${board.title}</td>
-					  <td>${board.content}</td>
-					  <td><img src="http://192.168.0.35:8081/${board.url}" width=100px/></td>
-				      <td>${board.createdAt}</td>
-					</tr>
-			</tbody>
-		</table>
+		<form action="/update" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="no" value="${board.no}">
+			<input type="hidden" name="url" value="${board.url}">
+			<div class="form-group">
+				<label>Title</label>
+				<input class="form-control" name="title" value="${board.title}">
+			</div>
+			<div class="form-group">
+				<label>Content</label>
+				<textarea class="form-control" name="content">
+					${board.content}
+				</textarea>
+			</div>
+			<!-- 
+				수정 시 file이 있다면 기존 파일은 삭제 하고 새로 추가된 파일로 업로드하고 DB 수정
+				(파일 삭제 : File 객체의 delete() 메서드 사용)
+			-->
+			<img src="http://192.168.0.35:8081/${board.url}" width="200px">
+		<div class="form-group">
+			<label>Update File</label>
+			<input class="form-control" name="file" type="file" accept="image/*"/>
+		</div>
+		</br>
+		<button typre="submit" class="btn btn-outline-warning">수정</button>
+		<a class="btn btn-outline-danger" href="/delete?no=${board.no}">삭제</a>
+		</form>
+		
 </body>
 </html>

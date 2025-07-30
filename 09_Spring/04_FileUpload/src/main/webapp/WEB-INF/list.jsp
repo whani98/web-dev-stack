@@ -14,6 +14,13 @@
 <body>
 	<div class="container">
 		<h1>List Page</h1>
+		<form action="/search" method="get" enctype="multipart/form-data">
+		<div class="input-group mb-3">
+		<input type="text" id="search" class="form-control" aria-label="Text input with dropdown button">
+		<input type="submit" class="btn btn-success" value="검색" />
+	</div>
+	</form>
+	
 		<table class="table">
 			<thead>
 				<tr>
@@ -32,9 +39,25 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<nav>
+						<ul class="pagination">
+								<li class="page-item ${paging.prev ? '' : 'disabled'}">
+									<a class="page-link" href="/list?page=${paging.startPage - 1}">Previous</a>
+								</li>
+														
+							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+								<li class="page-item">
+									<a class="page-link ${paging.page == page ? 'active' : ''}" href="/list?page=${page}">${page}</a>
+								</li>
+							</c:forEach>
+								<li class="page-item ${paging.next ? '' : 'disabled'}">
+									<a class="page-link" href="/list?page=${paging.endPage + 1}">Next</a>
+								</li>
+						</ul>
+						</nav>
 		<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#writeModal">글 추가</button>
 		</button>
-
+		
 		<!-- Modal -->
 		<div class="modal fade" id="writeModal" tabindex="-1" aria-labelledby="writeModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -68,6 +91,9 @@
 			 </form>
 		  </div>
 		</div>
+		
 	</div>
+
+	
 </body>
 </html>
