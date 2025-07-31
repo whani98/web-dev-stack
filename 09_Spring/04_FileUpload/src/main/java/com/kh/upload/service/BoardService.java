@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.upload.mapper.BoardMapper;
 import com.kh.upload.model.dto.BoardDTO;
+import com.kh.upload.model.dto.PagingDTO;
 import com.kh.upload.model.vo.Board;
 
 @Service
@@ -22,8 +23,10 @@ public class BoardService {
 		mapper.boardAdd(vo);
 	}
 	
-	public List<BoardDTO> boardAll() {
-		List<Board> list = mapper.boardAll();
+	public List<BoardDTO> boardAll(PagingDTO paging) {
+//		System.out.println(paging.getStartPage());
+		List<Board> list = mapper.boardAll(paging);
+		paging.setOffset(paging.getLimit() * (paging.getPage() - 1));
 		List<BoardDTO> dtoList = new ArrayList<BoardDTO>();
 		for(Board b : list) {
 			BoardDTO dto = new BoardDTO();
@@ -37,7 +40,6 @@ public class BoardService {
 	}
 	
 	public void boardUpdate(BoardDTO dto) {
-		
 		mapper.boardUpdate(dto);
 	}
 	
@@ -49,7 +51,8 @@ public class BoardService {
 		return mapper.boardSearch(no);
 	}
 	
-	public int total() {
-		return mapper.total();
+	public int total(String keyword) {
+		return mapper.total(keyword);
 	}
+	
 }

@@ -16,7 +16,8 @@
 		<h1>List Page</h1>
 		<form action="/search" method="get" enctype="multipart/form-data">
 		<div class="input-group mb-3">
-		<input type="text" id="search" class="form-control" aria-label="Text input with dropdown button">
+			
+		<input type="text" id="search" name="keyword" class="form-control" aria-label="Text input with dropdown button">
 		<input type="submit" class="btn btn-success" value="검색" />
 	</div>
 	</form>
@@ -40,21 +41,22 @@
 			</tbody>
 		</table>
 		<nav>
-						<ul class="pagination">
-								<li class="page-item ${paging.prev ? '' : 'disabled'}">
-									<a class="page-link" href="/list?page=${paging.startPage - 1}">Previous</a>
-								</li>
-														
-							<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
-								<li class="page-item">
-									<a class="page-link ${paging.page == page ? 'active' : ''}" href="/list?page=${page}">${page}</a>
-								</li>
-							</c:forEach>
-								<li class="page-item ${paging.next ? '' : 'disabled'}">
-									<a class="page-link" href="/list?page=${paging.endPage + 1}">Next</a>
-								</li>
-						</ul>
-						</nav>
+			<ul class="pagination">
+				<li class="page-item ${paging.prev ? '' : 'disabled'}">
+					<a class="page-link" href="/list?page=${paging.startPage - 1}&keyword=${param.keyword}">Previous</a>
+				</li>
+										
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="page">
+				<li class="page-item">
+					<a class="page-link ${paging.page == page ? 'active' : ''}" href="/list?page=${page}&keyword=${param.keyword}">${page}</a>
+				</li>
+			</c:forEach>
+			
+				<li class="page-item ${paging.next ? '' : 'disabled'}">
+					<a class="page-link" href="/list?page=${paging.endPage + 1}&keyword=${param.keyword}">Next</a>
+				</li>
+			</ul>
+			</nav>
 		<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#writeModal">글 추가</button>
 		</button>
 		
@@ -68,21 +70,20 @@
 		      </div> 
 			  <form action="/write" method="post" enctype="multipart/form-data">
 		      <div class="modal-body">
-					<div class="mb-3">
+				<div class="mb-3">
 					<label for="exampleFormControlInput1" class="form-label">Title</label>
 					<input type="text" class="form-control" name="title">
-					</div>
+				</div>
 					
-					<div class="mb-3">
+				<div class="mb-3">
 					<label for="exampleFormControlTextarea1" class="form-label">Content</label>
 					<textarea class="form-control" rows="3" name="content"></textarea>
-					</div>
+				</div>
 					
-					<div class="mb-3">
+			   <div class="mb-3">
 					<label class="form-label">Add File</label>
 					<input class="form-control" name="file" type="file" id="formFile" acept="image/*">
-		            </div>
-					
+		       </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 		        <button type="submit" class="btn btn-warning">등록</button>

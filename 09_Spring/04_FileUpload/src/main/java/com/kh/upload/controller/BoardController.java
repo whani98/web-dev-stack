@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.kh.upload.model.dto.PagingDTO;
 import com.kh.upload.model.dto.BoardDTO;
 import com.kh.upload.model.vo.Board;
 import com.kh.upload.service.BoardService;
@@ -80,9 +81,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<BoardDTO> list = service.boardAll();
+	public String list(Model model, PagingDTO paging) {
+		System.out.println(paging.getEndPage());
+//		System.out.println("keyword : " + paging.getKeyword());
+		List<BoardDTO> list = service.boardAll(paging);
 		model.addAttribute("list", list);
+		model.addAttribute("paging", new PagingDTO(paging.getPage(), service.total(paging.getKeyword())));
 		return "list";
 	}
 	

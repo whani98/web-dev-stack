@@ -10,27 +10,42 @@
 </resultMap>
 
 <insert id="boardAdd" parameterType="Board" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
-INSERT INTO board(title, content, url) 
-VALUES(#{title}, #{content}, #{url})
+	INSERT INTO board(title, content, url) 
+	VALUES(#{title}, #{content}, #{url})
 </insert>
 
-<select id="boardAll" resultMap="boardMap">
-SELECT * FROM board
+<select id="boardAll" parameterType="PagingDTO" resultMap="boardMap">
+	   SELECT * FROM board 
+	<where>
+	<if test="keyword != null">
+	   title LIKE CONCAT('%', #{keyword}, '%')
+	</if>
+	</where>
+	   LIMIT #{offset}, #{limit}
 </select>
 
 <select id="boardSearch" parameterType="int" resultMap="boardMap">
-SELECT * FROM board WHERE no = #{no}
+	SELECT * FROM board WHERE no = #{no}
 </select>
 
 <update id="boardUpdate" parameterType="BoardDTO">
-UPDATE board
-SET title = #{title}, content=#{content}, url=#{url}
-WHERE no = #{no}
+	UPDATE board
+	SET title = #{title}, content=#{content}, url=#{url}
+	WHERE no = #{no}
 </update>
 
 <delete id="boardDelete" parameterType="int">
-DELETE FROM board
-WHERE no = #{no}
+	DELETE FROM board
+	WHERE no = #{no}
 </delete>
+
+<select id="total" parameterType="String" resultType="int">
+    SELECT count(*) FROM board
+    <where>
+	<if test="keyword != null">
+	   title LIKE CONCAT('%', #{keyword}, '%')
+	</if>
+	</where>
+</select>
 
 </mapper>
