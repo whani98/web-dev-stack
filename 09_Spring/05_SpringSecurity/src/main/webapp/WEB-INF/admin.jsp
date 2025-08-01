@@ -6,15 +6,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인</title>
+	<title>관리자 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<form action="/login" method="post">
-	<h1>로그인</h1>
-	    <input type="text" id="id" name="username" placeholder="아이디" /><br/>
-	    <input type="password" id="pwd" name="password" placeholder="비밀번호" /><br/>
-	  <button type="submit" id="login">로그인</button>
-	</form>
+	<!-- get, /mypage : 인증된 사람만 즉, 로그인된 사람만-->
+		<h1>관리자 페이지</h1>
+
 </body>
 </html>

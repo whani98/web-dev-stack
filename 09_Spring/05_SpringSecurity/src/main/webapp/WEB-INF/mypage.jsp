@@ -7,23 +7,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>전체 페이지</title>
+	<title>마이 페이지</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-	<h1>전체 페이지</h1>
-	<sec:authorize access="isAnonymous()">
-	<a href="/login">로그인</a><br>
-	<a href="/register">회원가입</a><br>
-	</sec:authorize>
-	
-	<sec:authorize access="isAuthenticated()">
-	<a href="/logout">로그아웃</a><br></br>
-	<a href="/mypage">마이페이지</a><br>
-	</sec:authorize>
-	
+	<!-- get, /mypage : 인증된 사람만 즉, 로그인된 사람만-->
+	<h1>마이 페이지</h1>
+	<p>ID : <sec:authentication property="principal.id"/></p>
+	<p><sec:authentication property="principal.name"/>님의 페이지입니다.</p>
 	<sec:authorize access="hasRole('ADMIN')">
-	<a href="/admin">관리자페이지</a><br>
+		<a href="/admin">관리자페이지</a><br>
 	</sec:authorize>
 </body>
 </html>
