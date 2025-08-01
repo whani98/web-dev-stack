@@ -9,7 +9,7 @@
 -SQL(Structured Query Language)
 : 관계형 데이터베이스에서 데이터를 조회하거나 조작하기 위해 사용하는 표준 언어
 -SQL 종류
- 1. DML(Data Manifulation Language) : 데이터 조작어
+ 1. DML(Data Manipulation Language) : 데이터 조작어
     -데이터를 조작하기 위한 언어 
      (INSERT : 추가, SELECT :  조회, UPDATE : 수정, DELETE : 삭제)
      (CRED | Create : 추가, Read : 조회, Update : 수정, Delete : 삭제)
