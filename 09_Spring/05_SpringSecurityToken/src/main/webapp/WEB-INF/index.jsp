@@ -12,34 +12,86 @@
 </head>
 <body>
 	<h1>전체 페이지</h1>
+	<sec:authorize access="isAnonymous()" ></sec:authorize>
+	<sec:authorize access="isAuthenticated()"></sec:authorize>
+	<sec:authorize access="hasRole('ADMIN')"></sec:authorize>
 	
 	<div id="anonymous" style="display: none;">
-		<!-- sec : session에 저장되어있기 때문에 사용 가능 -->
-		<sec:authorize access="isAnonymous()" >
-			<a href="/login">로그인</a><br>
-			<a href="/register">회원가입</a><br>
-		</sec:authorize>
+		<a href="/login">로그인</a><br>
+		<a href="/register">회원가입</a><br>
 	</div> 
 	
 	<div id="authenticated" style="display: none;">
-		<!--sec:authorize access="isAuthenticated()" -->
-			<a href="/logout">로그아웃</a><br></br>
-			<a href="/mypage">마이페이지</a><br>
-		<!--/sec:authorize-->
-	
-		<!--sec:authorize access="hasRole('ADMIN')"-->
-			<a href="/admin">관리자페이지</a><br>
-		<!--/sec:authorize-->
+		<a href="/logout" id="logout">로그아웃</a><br></br>
+		<a href="/mypage"id="mypage">마이페이지</a><br>
 	</div>
 
+	<a href="/admin" id="admin">관리자페이지</a><br>
+	
 	<script>
+		
 		const token = localStorage.getItem("token");
 		//alert(token);
-		if(token!==null){
+		if(token !== null){
 			$('#authenticated').show();
+			$('#anonymous').hide();
+			$('#admin').hide();
+			
+			$.ajax({
+				url: '/check',
+				type: 'get',
+				data: { token : token },
+				success: function(data) {
+					// console.log(data);
+					// role이 admin일 경우 관리자페이지 보임
+					if(data.role === 'ROLE_ADMIN') {
+						$('#admin').show();
+					}
+				}
+			})
 		} else {
 			$('#anonymous').show();
+			$('#authenticated').hide();
+			$('#admin').hide();
 		}
+		
+		$('#logout').click((e) => {
+			e.preventDefault(); // 기존 기능 막기
+			localStorage.removeItem("token"); // 토큰 삭제
+			location.reload(); // 새로고침
+		})
+		
+		$('#mypage').click((e)=>{
+			e.preventDefault(); // 기존 기능 막기
+			$.ajax({
+				url: '/mypage',
+				type: 'get',
+				beforeSend: function(xhr) {
+					//JwtAuthenticationFilter의 parseBearerToken에서 가져오기
+					xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+				},
+				success: function(data) {
+					// console.log(data);
+					// SPA:SinglePageApplication->React, Vue
+					$('body').html(data);
+				}
+			})
+		})
+		
+		$('#admin').click((e)=>{
+					e.preventDefault(); // 기존 기능 막기
+					$.ajax({
+						url: '/admin',
+						type: 'get',
+						beforeSend: function(xhr) {
+							// JwtAuthenticationFilter의 parseBearerToken에서 가져오기
+							xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+						},
+						success: function(data) {
+							$('body').html(data);
+						}
+					})
+				})
 		
 	</script>
 </body>

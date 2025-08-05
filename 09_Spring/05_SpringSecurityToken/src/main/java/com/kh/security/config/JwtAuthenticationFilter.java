@@ -3,6 +3,10 @@ package com.kh.security.config;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -30,7 +34,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		
 		if(token!=null && !token.equalsIgnoreCase("null")) {
 			User user = tokenProvider.validate(token);
-			System.out.println(user);
+			// System.out.println(user);
+			
+			// 추출된 인증 정보를 필터링해서 사용할 수 있도로 SecurityContext에 등록
+			// UsernamePasswordAuthenticationToken(유저정보, 패스워드, 권한)
+			AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			
 		}
 		
 		filterChain.doFilter(request, response);

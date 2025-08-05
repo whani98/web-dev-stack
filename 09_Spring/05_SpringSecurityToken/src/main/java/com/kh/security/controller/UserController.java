@@ -40,5 +40,12 @@ public class UserController {
 		return null;
 	}
 	
+	@ResponseBody
+	@GetMapping("/check")
+	public User check(String token) {
+//		System.out.println(token);
+		return tokenProvider.validate(token);
+	}
+	
 
 }

@@ -16,7 +16,7 @@
 	<p>ID : <sec:authentication property="principal.id"/></p>
 	<p><sec:authentication property="principal.name"/>님의 페이지입니다.</p>
 	<sec:authorize access="hasRole('ADMIN')">
-		<a href="/admin">관리자페이지</a><br>
+		<a href="/admin" id="admin">관리자페이지</a><br>
 	</sec:authorize>
 </body>
 </html>
