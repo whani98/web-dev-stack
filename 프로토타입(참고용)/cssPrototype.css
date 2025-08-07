@@ -1,0 +1,143 @@
+/* --- 전역 --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Apple SD Gothic Neo","맑은 고딕",sans-serif; background: #f5f5f5; color: #333; }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- 레이아웃 그리드 --- */
+    .wrapper {
+      display: grid;
+      grid-template-rows: 60px 1fr;
+      grid-template-columns: 200px 1fr;
+      height: 100vh;
+    }
+    header {
+      grid-column: 1 / -1;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    nav.sidebar {
+      background: #68a05a;
+      padding: 20px;
+      color: #fff;
+    }
+    main {
+      padding: 20px;
+      overflow: auto;
+    }
+
+    /* --- 헤더 --- */
+    .logo { font-size: 1.5rem; font-weight: bold; color: #68a05a; }
+    .user-info { display: flex; align-items: center; }
+    .user-info .avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%; background: #ccc;
+      margin-right: 10px;
+    }
+    .user-info .details .name { font-weight: bold; }
+    .user-info .details .email { font-size: 0.85rem; color: #666; }
+
+    /* --- 사이드바 --- */
+    .sidebar ul { list-style: none; }
+    .sidebar li { margin-bottom: 12px; cursor: pointer; position: relative; padding-left: 10px; }
+    .sidebar li.active::before {
+      content: "▶";
+      position: absolute; left: 0; top: 0;
+      font-size: 0.8rem;
+    }
+    .sidebar li > ul { margin-top: 6px; margin-left: 16px; }
+    .sidebar li > ul li { margin-bottom: 6px; font-size: 0.9rem; }
+
+    /* --- 툴바 --- */
+    .toolbar {
+      display: flex; align-items: center;
+      margin-bottom: 12px;
+    }
+    .toolbar .btn {
+      padding: 6px 12px;
+      border: 1px solid #68a05a;
+      background: #fff; color: #68a05a;
+      border-radius: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+    .toolbar .btn--primary {
+      background: #68a05a; color: #fff; border: none;
+    }
+    .toolbar select,
+    .toolbar input[type="text"] {
+      height: 32px;
+      padding: 0 8px;
+      margin-right: 8px;
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .toolbar select:focus,
+    .toolbar input:focus {
+      border-color: #68a05a;
+      box-shadow: 0 0 0 2px rgba(104,160,90,0.2);
+    }
+
+    /* --- 테이블 --- */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 8px 4px;
+      background: transparent;
+    }
+    thead th {
+      background: #e0e0e0;
+      border-radius: 16px;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: normal;
+    }
+    tbody td {
+      background: #f0f0f0;
+      border-radius: 12px;
+      padding: 8px 12px;
+      vertical-align: middle;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* 체크박스 중앙 배치 */
+    td:first-child { text-align: center; }
+    td:first-child input { transform: scale(1.2); }
+
+    /* --- 페이지네이션 --- */
+    .pagination {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .pagination a,
+    .pagination span {
+      margin: 0 4px;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    .pagination a { cursor: pointer; }
+    .pagination .current {
+      background: #68a05a;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* --- 삭제 버튼 --- */
+    .delete-btn {
+      margin-top: 12px;
+      float: right;
+      padding: 6px 16px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }

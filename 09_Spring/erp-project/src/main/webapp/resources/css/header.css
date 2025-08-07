@@ -1,0 +1,38 @@
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  padding: 0 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  z-index: 999;
+  width: 100%; /* ✅ 이거 반드시 있어야 함 */
+  box-sizing: border-box; /* ✅ 패딩 포함 너비 계산 */
+}
+
+.top-header h2 {
+  font-size: 20px;
+  color: navy;
+}
+
+.top-header .right-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.top-header .btn-logout,
+.top-header .btn-mypage {
+  color: white;
+  background-color: navy;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.top-header .btn-logout:hover,
+.top-header .btn-mypage:hover {
+  background-color: #003366;
+}
