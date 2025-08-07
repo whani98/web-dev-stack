@@ -1,19 +1,21 @@
 :root {
-  --side-width: 250px;
-  --header-height: 70px;
+  --side-width: 250px; /* 사이드 메뉴 가로 길이*/
+  --header-height: 70px; /* 헤더 높이*/
 }
 
+/* 메뉴 */
 .side .menu {
-  position: fixed;
+  position: fixed; /* 고정 */
   background-color: #67ae6e;
   border-radius: 10px;
   height: 90%;
   width: var(--side-width);
-  margin-top: calc(var(--header-height) + 10px); /*헤더높이 70px + 여백 10px*/
+  margin-top: calc(var(--header-height) + 10px); /* 헤더높이 70px + 여백 10px */
   color: white;
   box-shadow: #33333362 0px 1px 1px;
   overflow-y: auto;
 }
+
 /* 로고 */
 .side .logo {
   position: fixed;
@@ -25,24 +27,26 @@
   border: #cec7c7 solid 1px;
   box-shadow: #33333362 0px 1px 1px;
 }
+/* 메인을 메뉴 가로 길이 만큼 밀기 */
 .main {
   padding-left: var(--side-width);
 }
 
-/* 전면 수정 */
+/* 상단 헤더 */
 .main header {
   position: fixed;
-  border-bottom: 1px solid grey;
   height: var(--header-height);
   width: calc(100% - var(--side-width));
   left: var(--side-width);
   background-color: #f8f8f8;
   z-index: 10;
   border-radius: 10px;
+  box-shadow: #33333362 0px 1px 1px;
 }
-
+/* 메인 섹션 */
 .main .section {
-  padding-top: var(--header-height);
+  margin: 10px;
+  border-radius: 10px;
 }
 
 /* 사이드 바 */
@@ -125,11 +129,6 @@
   box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
 
-.top-header h2 {
-  font-size: 20px;
-  color: navy;
-}
-
 .top-header .right-area {
   display: flex;
   align-items: center;
@@ -151,12 +150,13 @@
 .top-header .btn-mypage:hover {
   background-color: #328e6e;
 }
+
 /* 본문 스타일 */
+
 .main section {
   padding: 20px;
-  padding-top: calc(var(--header-height) + 20px); /* 헤더 높이 반영 */
-  min-height: calc(100vh - var(--header-height));
-  background-color: #f9f9f9;
+  padding-top: var(--header-height);
+  height: 100%;
   font-family: "Pretendard", sans-serif;
 }
 
@@ -194,10 +194,11 @@
   cursor: pointer;
 }
 .filter-bar button:hover {
-  background-color: #003366;
+  background-color: #67ae6e;
+  color: #ffffff;
 }
 
-/* 테이블 기본 */
+/* 테이블 */
 /*.table-wrapper {
   overflow-x: auto;
 }*/
@@ -213,16 +214,65 @@ table.data-table {
   border-radius: 15px;
   text-align: center;
 }
+
+/* 테이블 컬럼명 */
 .data-table th {
   background-color: #cecece;
   font-weight: bold;
   border: none;
   border-radius: 10px;
 }
-
+/* 테이블 데이터 */
 .data-table td {
   background-color: #e4e4e7;
   font-weight: bold;
   border: none;
   border-radius: 10px;
+}
+/* 테이블 내 버튼*/
+.innerbtn {
+  background-color: #ffffff;
+  color: #516b38;
+  border: #67ae6e solid 1px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.innerbtn:hover {
+  background-color: #67ae6e;
+  color: #ffffff;
+}
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li a {
+  display: block;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.pagination li a:hover {
+  background-color: #eee;
+}
+
+.pagination .active a {
+  background-color: #328e6e;
+  color: white;
+  font-weight: bold;
+  border-color: #328e6e;
+}
+
+.pagination .disabled a {
+  pointer-events: none;
+  opacity: 0.4;
 }
