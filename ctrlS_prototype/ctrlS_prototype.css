@@ -2,17 +2,19 @@
   --side-width: 250px; /* 사이드 메뉴 가로 길이*/
   --header-height: 70px; /* 헤더 높이*/
 }
+* {
+  font-family: "Pretendard", sans-serif;
+}
 
 /* 메뉴 */
 .side .menu {
-  position: fixed; /* 고정 */
+  position: fixed;
   background-color: #67ae6e;
   border-radius: 10px;
   height: 90%;
   width: var(--side-width);
   margin-top: calc(var(--header-height) + 10px); /* 헤더높이 70px + 여백 10px */
   color: white;
-  box-shadow: #33333362 0px 1px 1px;
   overflow-y: auto;
 }
 
@@ -21,63 +23,42 @@
   position: fixed;
   background-color: #f8f8f8;
   text-align: center;
-  height: var(--header-height);
-  width: var(--side-width);
+  height: var(--header-height); /* 우측 헤더 높이와 동일 */
+  width: var(--side-width); /* 사이드 메뉴 가로 길이와 동일 */
   border-radius: 10px;
   border: #cec7c7 solid 1px;
-  box-shadow: #33333362 0px 1px 1px;
-}
-/* 메인을 메뉴 가로 길이 만큼 밀기 */
-.main {
-  padding-left: var(--side-width);
+  box-shadow: #33333362 0 1px 1px; /* 그림자 효과 */
 }
 
-/* 상단 헤더 */
-.main header {
-  position: fixed;
-  height: var(--header-height);
-  width: calc(100% - var(--side-width));
-  left: var(--side-width);
-  background-color: #f8f8f8;
-  z-index: 10;
-  border-radius: 10px;
-  box-shadow: #33333362 0px 1px 1px;
-}
-/* 메인 섹션 */
-.main .section {
-  margin: 10px;
-  border-radius: 10px;
-}
-
-/* 사이드 바 */
+/* 사이드 메뉴 중 주메뉴 */
 .side h1 {
   font-size: 22px;
   margin: 20px 16px;
 }
-
+/* 사이드 메뉴 중 서브 메뉴 */
 .side h1 a {
   color: #67ae6e;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
 }
-
+/* 사이드 메뉴 글씨 색 */
 .side h1 a:hover {
   color: #ccc;
 }
 
-/* 접이식 상단 제목 */
+/* 사이드메뉴 중 주메뉴 스타일*/
 .menu-title {
   font-weight: bold;
   cursor: pointer;
   padding: 15px 20px;
 }
-
+/* 사이드메뉴 중 주메뉴에 커서 올렸을 경우 */
 .menu-title:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 서브메뉴 숨김/펼침 */
+/* 서브 메뉴 숨김/펼침 */
 .submenu {
   display: none;
   padding-left: 20px;
@@ -89,7 +70,7 @@
   display: block;
 }
 
-/* 서브메뉴 항목 스타일 */
+/* 서브 메뉴 스타일 */
 .submenu a {
   display: block;
   padding: 6px 12px;
@@ -99,9 +80,9 @@
   border-radius: 4px;
   transition: background 0.2s;
 }
-
+/* 서브 메뉴 커서 올렸을 경우 */
 .submenu a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
@@ -111,8 +92,11 @@
   color: white;
   font-weight: bold;
 }
+.main {
+  padding-left: var(--side-width); /* 메인을 메뉴 가로 길이 만큼 밀기 */
+}
 
-/* 상단바 */
+/* 상단 헤더 */
 .top-header {
   position: fixed;
   display: flex;
@@ -122,13 +106,14 @@
   padding: 0 20px;
   background-color: #f8f8f8;
   border: #cec7c7 solid 1px;
+  border-radius: 10px;
   z-index: 999;
-  width: 100%; /* 필수 */
+  /* 전체 가로 길이에서 사이드메뉴 가로 길이만큼 밀기, 97%를 한 이유는 상단 헤더 오른쪽 끝이 보이게 하기 위함 */
+  width: calc(97% - var(--side-width));
   margin: 0 0 20px 20px;
   box-shadow: #33333362 0px 1px 1px;
   box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
-
 .top-header .right-area {
   display: flex;
   align-items: center;
@@ -152,15 +137,17 @@
 }
 
 /* 본문 스타일 */
-
-.main section {
+/* 메인 섹션 */
+.main .section {
+  margin: 10px;
+  overflow-y: auto; /* 스크롤 가능 */
   padding: 20px;
   padding-top: var(--header-height);
   height: 100%;
   font-family: "Pretendard", sans-serif;
 }
 
-/* 공통 제목 */
+/* 메뉴 제목 */
 .section-title {
   font-size: 22px;
   font-weight: bold;
@@ -169,79 +156,101 @@
   padding-bottom: 8px;
 }
 
-/* 검색 필터 영역 */
+/* 검색 필터 영역(select, input) */
 .filter-bar {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
   flex-wrap: wrap;
+  font-size: 14px;
 }
 
 .filter-bar input[type="text"],
+.filter-bar input[type="password"],
+.filter-bar input[type="month"],
+.filter-bar input[type="date"],
+.filter-bar input[type="time"],
+.filter-bar input[type="checkbox"],
+.filter-bar fieldset,
 .filter-bar select {
   padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.filter-bar input[type="radio"],
+.filter-bar input[type="checkbox"] {
+  accent-color: #67ae6e; /* 체크박스 색상 */
+}
+/* submit, a, button 스타일 */
+.filter-bar input[type="submit"],
+.filter-bar a,
 .filter-bar button {
+  text-decoration: none;
   background-color: #ffffff;
   color: #516b38;
   border: #67ae6e solid 1px;
   padding: 6px 12px;
   border-radius: 10px;
   cursor: pointer;
+  font-weight: bold;
 }
+/* a 태그 상세 크기 조정*/
+.filter-bar a {
+  padding: 5px 12px;
+  font-size: 14px;
+}
+/* 각종 버튼들 커서 올렸을 경우 색상 변경 */
+.filter-bar input[type="submit"]:hover,
+.filter-bar a:hover,
 .filter-bar button:hover {
   background-color: #67ae6e;
   color: #ffffff;
 }
 
 /* 테이블 */
-/*.table-wrapper {
-  overflow-x: auto;
-}*/
 table.data-table {
   width: 100%;
   font-size: 14px;
   border: none;
 }
+
 .data-table th,
 .data-table td {
-  padding: 10px;
-  border: none;
-  border-radius: 15px;
+  padding: 1px 10px;
+  border-radius: 10px;
   text-align: center;
+  height: fit-content;
+  max-height: 1px;
 }
 
 /* 테이블 컬럼명 */
 .data-table th {
   background-color: #cecece;
   font-weight: bold;
-  border: none;
-  border-radius: 10px;
 }
+
 /* 테이블 데이터 */
 .data-table td {
   background-color: #e4e4e7;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
 }
+
 /* 테이블 내 버튼*/
 .innerbtn {
-  background-color: #ffffff;
-  color: #516b38;
-  border: #67ae6e solid 1px;
-  padding: 6px 12px;
-  border-radius: 10px;
+  background-color: #e4e4e7;
+  border: none;
+  color: #333;
+  padding: 6px 10px;
   cursor: pointer;
+  font-weight: bold;
 }
+
+/* 테이블 내 버튼 커서 올렸을 경우 */
 .innerbtn:hover {
-  background-color: #67ae6e;
-  color: #ffffff;
+  color: #67ae6e;
 }
+
 /* 페이징 */
 .pagination {
   display: flex;
@@ -253,9 +262,9 @@ table.data-table {
 
 .pagination li a {
   display: block;
-  padding: 8px 14px;
+  padding: 5px 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   color: #333;
   text-decoration: none;
   transition: 0.2s;
