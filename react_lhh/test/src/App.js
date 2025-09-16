@@ -1,30 +1,30 @@
+import { useState } from "react";
 import logo from "./logo.svg";
 
 function App() {
-  let taco = [
-    { id: 1, title: "까르니따스" },
-    { id: 2, title: "도래창" },
-    { id: 3, title: "쉬림프" },
-  ];
+  let [selMenu, setSelMenu] = useState("");
+  let menuChange = (event) => {
+    // 옵션 선택할 때마다 selMenu의 값이 바뀜
+    if (event.target.value != "") {
+      setSelMenu(event.target.value + " 선택됨.");
+    } else {
+      setSelMenu("메뉴를 선택 하세요.");
+    }
+  };
   return (
     <div className="App">
       <h1>메뉴 선택</h1>
-      <Select tacos={taco}></Select>
-      <h3>내용 없음</h3>
+      <select
+        // onChange 각 option에 반응
+        onChange={menuChange}
+      >
+        <option value="">메뉴</option>
+        <option value="까르니따스">까르니따스</option>
+        <option value="도래창">도래창</option>
+        <option value="쉬림프">쉬림프</option>
+      </select>
+      <p style={{ color: "blue" }}>{selMenu}</p>
     </div>
-  );
-}
-function Select(props) {
-  let lis = [];
-  for (let i = 0; i < props.tacos.length; i++) {
-    let t = props.tacos[i];
-    lis.push(<option id={t.id}>{t.title}</option>);
-  }
-  return (
-    <select>
-      <option>타코 메뉴</option>
-      {lis}
-    </select>
   );
 }
 
