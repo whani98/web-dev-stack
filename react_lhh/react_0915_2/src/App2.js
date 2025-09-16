@@ -74,22 +74,6 @@ function App() {
       >
         Create
       </a>
-
-      <input
-        type="button"
-        value="Delete"
-        onClick={() => {
-          let newTopics = [];
-          for (let i = 0; i < m_topics.length; i++) {
-            //m_topics에 지정되어있는 id와
-            //내가 지우고자 하는 요소의 id가 다른 경우에만 newTopics에 담는다
-            if (m_topics[i].id !== id) {
-              newTopics.push(m_topics[i]);
-            }
-          } // for
-          setTopics(newTopics);
-        }}
-      />
     </div>
   );
 }
