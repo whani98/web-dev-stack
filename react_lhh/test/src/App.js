@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
 
 function App() {
+  let taco = [
+    { id: 1, title: "까르니따스" },
+    { id: 2, title: "도래창" },
+    { id: 3, title: "쉬림프" },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>메뉴 선택</h1>
+      <Select tacos={taco}></Select>
+      <h3>내용 없음</h3>
     </div>
+  );
+}
+function Select(props) {
+  let lis = [];
+  for (let i = 0; i < props.tacos.length; i++) {
+    let t = props.tacos[i];
+    lis.push(<option id={t.id}>{t.title}</option>);
+  }
+  return (
+    <select>
+      <option>타코 메뉴</option>
+      {lis}
+    </select>
   );
 }
 
