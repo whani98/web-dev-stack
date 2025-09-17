@@ -1,6 +1,6 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-// 컴포넌트 분리-강사님 풀이2
+// 강사님 풀이 + 내 풀이 추가(컴포넌트 분리)
 function App() {
   let [greet, setGreet] = useState("");
   let [msg, setMsg] = useState("");
@@ -30,26 +30,31 @@ function App() {
       <p>{greet}</p>
       {/* 기분을 선택하는 select tag */}
 
-      <MyMood mood={moodChange}></MyMood>
-      <p>{msg}</p>
+      <div>
+        <MyMood onChange={moodChange}></MyMood>
+        <p>{msg}</p>
+      </div>
     </div>
   );
 }
 {
   /* 기분을 선택하는 코드를 MyMood컴포넌트로 분리 */
 }
-function MyMood({ mood }) {
-  // { mood }이렇게 쓰면 mood={moodChange} 얘를 한 번에 받음
-  return (
-    <div>
-      <select onChange={mood}>
-        <option value="">기분을 선택하세요.</option>
-        <option value="행복">행복</option>
-        <option value="슬픔">슬픔</option>
-        <option value="화남">화남</option>
-      </select>
-    </div>
-  );
+function MyMood(props) {
+  let lis = [];
+  let emotions = [
+    { value: "", text: "기분을 선택하세요." },
+    { value: "행복", text: "행복" },
+    { value: "슬픔", text: "슬픔" },
+    { value: "화남", text: "화남" },
+  ];
+
+  for (let i = 0; i < emotions.length; i++) {
+    let emotion = emotions[i];
+    lis.push(<option value={emotion.value}>{emotion.text}</option>);
+  }
+
+  return <select onChange={props.onChange}>{lis}</select>;
 }
 
 export default App;
