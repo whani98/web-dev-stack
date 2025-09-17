@@ -20,14 +20,6 @@ function App() {
       setAge(""); // 나이 입력 후 초기화
     }
   }
-  let userDel = (index) => {
-    // filter는 배열을 순회하면서 조건에 맞는 요소만 골라서 새로운 배열을 만드는 함수
-    // filter함수는 최대 두 개의 인자를 가지는데,
-    // 첫번째 인자 res는 배열의 i번째 요소(사용하지 않는다면 _(언더바)로 지정)
-    // 두번째 인자 i는 배열의 index
-    let newUser = userList.filter((res, i) => i !== index); // 필터 호출하면서 인덱스 값을 받아옴
-    setUserList(newUser);
-  };
 
   return (
     <div className="App">
@@ -52,22 +44,12 @@ function App() {
         <tr>
           <th>이름</th>
           <th>나이</th>
-          <th>비고</th>
         </tr>
 
-        {userList.map((u, index) => (
+        {userList.map((u) => (
           <tr>
             <td>{u.name}</td>
             <td>{u.age}</td>
-            <td>
-              <input
-                type="button"
-                value="삭제"
-                onClick={() => {
-                  userDel(index);
-                }}
-              />
-            </td>
           </tr>
         ))}
       </table>
