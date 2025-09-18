@@ -5,19 +5,26 @@ function App() {
   let [work, setWork] = useState("");
   let [date, setDate] = useState("");
   let [todoList, setTodoList] = useState([]);
-  const todoAdd = () => {
-    if (work.trim() !== "" && date.trim() !== "") {
-      setTodoList([...todoList, { work, date }]);
+  function todoAdd() {
+    if (work.trim() && date.trim()) {
+      setTodoList([...todoList, { work: work, date: date }]);
+      setWork("");
+      setDate("");
     }
-    setWork("");
-    setDate("");
+  }
+  const todoDelete = (index) => {
+    //alert(index);
+    todoAdd();
+    setTodoList(todoList.filter((res, i) => i !== index));
   };
+
   return (
     <div className="App">
       <h1>할 일 목록</h1>
       <input
         type="text"
         placeholder="할 일을 입력하세요"
+        value={work}
         onChange={(e) => {
           setWork(e.target.value);
         }}
@@ -26,12 +33,12 @@ function App() {
       <input
         type="text"
         placeholder="마감일 (예: 2025-09-20)"
+        value={date}
         onChange={(e) => {
           setDate(e.target.value);
         }}
       />
       <input type="button" value="추가" onClick={todoAdd} />
-      <br />
       <br />
       <table border="1">
         <tr>
@@ -39,16 +46,23 @@ function App() {
           <th>마감일</th>
           <th>작업</th>
         </tr>
-        {todoList.map((t) => (
+        {todoList.map((t, index) => (
           <tr>
             <td>{t.work}</td>
             <td>{t.date}</td>
             <td>
-              <input type="button" value="삭제" />
+              <input
+                type="button"
+                value="삭제"
+                onClick={() => {
+                  todoDelete(index);
+                }}
+              />
             </td>
           </tr>
         ))}
       </table>
+      <br />
     </div>
   );
 }
