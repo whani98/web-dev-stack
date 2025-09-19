@@ -1,21 +1,22 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-
+import ScForm from "./components/ScForm";
+// 강사님 코드 부분 추가
 function App() {
   let [work, setWork] = useState("");
   let [date, setDate] = useState("");
   let [todoList, setTodoList] = useState([]);
   function todoAdd() {
     if (work.trim() && date.trim()) {
-      setTodoList([...todoList, { work: work, date: date }]);
+      setTodoList([...todoList, { work, date }]);
       setWork("");
       setDate("");
     }
   }
   const todoDelete = (index) => {
     //alert(index);
-    todoAdd();
-    setTodoList(todoList.filter((res, i) => i !== index));
+    const newTodo = todoList.filter((_, i) => i !== index);
+    setTodoList(newTodo);
   };
 
   return (
@@ -40,28 +41,10 @@ function App() {
       />
       <input type="button" value="추가" onClick={todoAdd} />
       <br />
-      <table border="1">
-        <tr>
-          <th>할 일</th>
-          <th>마감일</th>
-          <th>작업</th>
-        </tr>
-        {todoList.map((t, index) => (
-          <tr>
-            <td>{t.work}</td>
-            <td>{t.date}</td>
-            <td>
-              <input
-                type="button"
-                value="삭제"
-                onClick={() => {
-                  todoDelete(index);
-                }}
-              />
-            </td>
-          </tr>
-        ))}
-      </table>
+
+      {/* ScForm.jsx에서 받은 파라미터값 넣기*/}
+      <ScForm todoList={todoList} todoDelete={todoDelete} />
+
       <br />
     </div>
   );
