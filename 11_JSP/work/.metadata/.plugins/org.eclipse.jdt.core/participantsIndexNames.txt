@@ -1,0 +1,7 @@
+INDEX VERSION 1.134
+D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\983633376.index
+\Ex0923_user\src\main\java
+D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3808107478.index
+\Ex0922_DB\src\main\java
+D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2913369885.index
+\Ex0922_work\src\main\java
