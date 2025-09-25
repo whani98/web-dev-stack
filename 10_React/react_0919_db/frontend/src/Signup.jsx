@@ -59,7 +59,6 @@ function Signup() {
             가입완료
           </button>
 
-          <p></p>
           <Link to="/" className="btn btn-default border">
             로그인
           </Link>

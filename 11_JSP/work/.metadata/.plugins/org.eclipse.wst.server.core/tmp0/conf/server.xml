@@ -162,7 +162,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ex0923_user" path="/Ex0923_user" reloadable="true" source="org.eclipse.jst.jee.server:Ex0923_user">
+      <Context docBase="D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\web-dev-stack\11_JSP\work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Ex0924_session" path="/Ex0924_session" reloadable="true" source="org.eclipse.jst.jee.server:Ex0924_session">
 	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" maxWait="1" name="jdbc/oracle_test" password="qwer1234" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="system"/>
 </Context></Host>
     </Engine>
