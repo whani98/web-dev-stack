@@ -6,6 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>product_detail</title>
+
+<script src="js/httpRequest.js"></script>
+
+<script>
+	function addCart(idx, m_idx) {
+		let url = "cart_insert.do";
+		let param = "idx=" + idx + "&m_idx=" + m_idx;
+		sendRequest(url, param, resultAdd, "post");
+	}
+	
+	function resultAdd() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			// data = "[{'result': '%s'}]"
+			let data = xhr.responseText;
+			let json = eval(data); // 데이터를 json으로 바꿈
+			
+			if(json[0].result == 'yes'){
+				// yes면
+				alert("장바구니에 담았습니다.");
+				// 확인을 눌렀을경우
+				if(confirm("장바구니로 이동하시겠습니까?")){ 
+					location.href="cart_list.do?m_idx=1"
+				}
+			} else {
+				alert("이미 장바구니에 담겨져 있습니다.");
+			}
+		}
+	}
+</script>
+
 </head>
 <body>
 	<form>
@@ -49,8 +79,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="button" value="장바구니에 담기" onClick="location.href='cart_list.do'">
-					<input type="button" value="장바구니 보기" onClick="location.href='cartList.jsp'">
+					<input type="button" value="장바구니에 담기" onClick="addCart('${vo.idx}', '${1}')">
+					<input type="button" value="장바구니 보기" onClick="location.href='cart_list.do?m_idx=1'">
 				</td>
 			</tr>
 		</table>

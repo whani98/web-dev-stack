@@ -1,0 +1,52 @@
+package action;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.MemberDAO;
+
+/**
+ * Servlet implementation class MemberModifyFinAct
+ */
+@WebServlet("/member_modify_fin.do")
+public class MemberModifyFinAct extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		// 파라미터 값 받기
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("email");
+		String addr = request.getParameter("addr");
+		
+		// 파라미터로 받은 값 map에 담기
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		map.put("name", name);
+		map.put("id", id);
+		map.put("pwd", pwd);
+		map.put("email", email);
+		map.put("addr", addr);
+		
+		// DAO에 파라미터 값 보내기
+		MemberDAO.getInstance().modify(map);
+		
+		// 모든 요청이 끝나면 list.do로 돌아가기
+		response.sendRedirect("list.do");
+		
+	}
+
+}

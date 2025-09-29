@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<table border="1">
+		<tr>
+			<th>부서번호</th>
+			<th>부서이름</th>
+			<th>위치</th>
+			<th>삭제</th>
+			<th>수정</th>
+		</tr>
+		<c:forEach var="vo" items="${list}">
+			<tr>
+				<td>${vo.deptNo}</td>
+				<td>${vo.dName}</td>
+				<td>${vo.loc}</td>
+				<td><input type="button" value="삭제"
+					onClick="location.href='dept_del.do?deptNo=${vo.deptNo}'" /></td>
+				<td><input type="button" value="수정"
+					onClick="location.href='dept_update.do?deptNo=${vo.deptNo}'" /></td>
+			</tr>
+		</c:forEach>
+		<tr>
+			<td colspan="5"><input type="button" value="부서등록"
+				onClick="location.href='insert_form.jsp'"></td>
+		</tr>
+	</table>
+
+</body>
+</html>
