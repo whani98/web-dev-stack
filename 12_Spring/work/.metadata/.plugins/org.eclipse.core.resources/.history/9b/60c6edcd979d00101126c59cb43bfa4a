@@ -1,0 +1,12 @@
+package controller;
+
+import dao.MemberDAO;
+
+public class MemberController {
+
+	MemberDAO member_dao;
+	
+	public MemberController(MemberDAO member_dao) {
+		this.member_dao = member_dao;
+	}
+}

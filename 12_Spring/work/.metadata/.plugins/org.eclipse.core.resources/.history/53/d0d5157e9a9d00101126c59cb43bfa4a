@@ -1,0 +1,27 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import vo.MemberVO;
+
+public class MemberDAO {
+
+	SqlSession sqlSession;
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+	// ¸â¹ö ¸ñ·Ï
+	public List<MemberVO> selectList(){
+		List<MemberVO> list = sqlSession.selectList("m.member_list");
+		return list;
+	}
+	
+	// ¸â¹ö µî·Ï
+	public int insert(MemberVO vo) {
+		int res = sqlSession.insert("m.member_insert" , vo);
+		return res;
+	}
+}

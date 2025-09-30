@@ -1,0 +1,70 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.MemberDAO;
+import vo.MemberVO;
+
+@Controller
+public class MemberController {
+
+	MemberDAO member_dao;
+
+	public MemberController(MemberDAO member_dao) {
+		this.member_dao = member_dao;
+	}
+
+	// 회원 조회
+	@RequestMapping("list.do")
+	public String list(Model model) {
+		List<MemberVO> list = member_dao.selectList();
+
+		// 바인딩
+		model.addAttribute("list", list);
+
+		// 포워딩
+		return "member/member_list";
+	}
+
+	// 회원 등록 페이지
+	@RequestMapping("member_register_form.do")
+	public String registerIn() {
+		return "member/member_register";
+	}
+
+	// 회원 등록
+	@RequestMapping("member_register.do")
+	public String register(MemberVO vo) {
+		member_dao.insert(vo);
+		return "redirect:list.do";
+	}
+	
+	// 회원 삭제
+	@RequestMapping("member_delete.do")
+	public String delete(int idx) {
+		member_dao.delete(idx);
+		return "redirect:list.do";
+	}
+	
+
+	// 수정할 회원 조회
+	@RequestMapping("member_one.do")
+	public String selectOne(int idx, Model model) {
+	     MemberVO vo = member_dao.selectOne(idx);
+	     mod
+		return "member_modify";
+	}
+
+	// 회원 수정
+	@RequestMapping("member_modify.do")
+	public String modify(MemberVO vo) {
+		member_dao.update(vo);
+		return "redirect:list.do";
+	}
+
+
+}

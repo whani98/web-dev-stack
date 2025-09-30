@@ -1,0 +1,20 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.DeptDAO;
+
+@Controller // 어노테이션 필수!
+public class DeptController {
+
+	DeptDAO dept_dao;
+	public DeptController(DeptDAO dept_dao) {
+		this.dept_dao = dept_dao;
+	}
+	
+	@RequestMapping("list.do")
+	public String list() {
+		
+	}
+}

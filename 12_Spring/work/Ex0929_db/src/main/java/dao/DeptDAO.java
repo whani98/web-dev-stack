@@ -1,0 +1,37 @@
+package dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import vo.DeptVO;
+
+public class DeptDAO {
+
+	SqlSession sqlSession;
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+	}
+	
+	// 부서 목록
+	public List<DeptVO> selectList(){
+		List<DeptVO> list = sqlSession.selectList("d.dept_list");
+		return list;
+	}
+	
+	public int delete(int deptno) {
+		int res = sqlSession.delete("d.dept_delete", deptno);
+		return res;
+	}
+	
+	public int insert(DeptVO vo) {
+		int res = sqlSession.insert("d.dept_insert", vo);
+		return res;
+	}
+	
+	public DeptVO selectOne(int deptno) {
+		DeptVO vo = sqlSession.selectOne("d.dept_one", deptno);
+		
+		return vo;
+	}
+}

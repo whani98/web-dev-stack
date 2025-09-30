@@ -1,0 +1,12 @@
+package controller;
+
+import dao.MemberDAO;
+
+public class MemberController {
+
+	MemberDAO member_dao;
+	
+	public MemberController() {
+		// TODO Auto-generated constructor stub
+	}
+}

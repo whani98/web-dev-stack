@@ -1,0 +1,23 @@
+package service;
+
+import java.util.List;
+
+import dao.BoardDAO;
+
+// 인터페이스 구현, 추상 메서드 재정의
+public class BoardServiceImpl implements BoardService{
+    // DAO를 몰아서 관리
+	BoardDAO dao; // 메모리할당 되어있어야 값 꺼내 쓸 수 있음
+	
+	public BoardServiceImpl(BoardDAO dao) {
+	
+		this.dao = dao;
+	}
+	
+	@Override
+	public List selectList() {
+		// 
+		return dao.selectList();
+	}
+
+}

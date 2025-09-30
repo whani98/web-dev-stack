@@ -1,0 +1,64 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import dao.DeptDAO;
+import vo.DeptVO;
+
+@Controller // 어노테이션 필수!
+public class DeptController {
+
+	DeptDAO dept_dao;
+
+	public DeptController(DeptDAO dept_dao) {
+		this.dept_dao = dept_dao;
+	}
+
+	// 부서 명단
+	@RequestMapping("list.do")
+	public String list(Model model) {
+		List<DeptVO> list = dept_dao.selectList();
+
+		// DB에서 가져온 값을 list에 담아서 바인딩
+		model.addAttribute("list", list);
+
+		// 포워딩
+		return "dept_list";
+	}
+
+	// 부서 삭제
+	@RequestMapping("dept_delete.do")
+	public String delete(@RequestParam int deptno) {
+
+		dept_dao.delete(deptno);
+
+		return "redirect:list.do";
+	}
+
+	// 부서등록 버튼 -> 부서 등록 페이지로 이동
+	@RequestMapping("dept_register_in.do")
+	public String registerIn() {
+		return "dept_register";
+	}
+
+	// 부서 등록
+	@RequestMapping("dept_insert.do")
+	public String insert(@RequestParam DeptVO vo) {
+
+		dept_dao.insert(vo);
+
+		return "redirect:list.do";
+	}
+	
+	// 부서수정 버튼 -> 부서 수정 페이지로 이동
+		@RequestMapping("dept_modify_in.do")
+		public String modifyIn() {
+			return "dept_modify";
+		}
+
+}
