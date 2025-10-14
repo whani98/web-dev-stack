@@ -1,0 +1,24 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.CartDAO;
+
+@Controller
+public class CartController {
+
+	CartDAO cart_dao;
+	public void setCart_dao(CartDAO cart_dao) {
+		this.cart_dao = cart_dao;
+	}
+	
+	// 회원별 장바구니 조회
+	@RequestMapping("cart_list.do")
+	public String select(int m_idx) {
+		cart_dao.select(m_idx);
+		
+		return "cart_list";
+	}
+	
+}

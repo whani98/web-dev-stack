@@ -21,7 +21,7 @@ public class MemberController {
 	}
 
 	// 회원 조회
-	@RequestMapping("/list.do")
+	@RequestMapping("list.do")
 	public String list(Model model) {
 
 		List<MemberVO> list = member_dao.selectList();
@@ -34,14 +34,14 @@ public class MemberController {
 	}
 
 	// 회원 등록 페이지
-	@RequestMapping("/member_register_form.do")
+	@RequestMapping("member_register_form.do")
 	public String registerIn() {
 
 		return "member/member_register";
 	}
 
 	// 회원 등록
-	@RequestMapping("/member_register.do")
+	@RequestMapping("member_register.do")
 	public String register(MemberVO vo) {
 
 		// 비밀번호 암호화
@@ -56,7 +56,7 @@ public class MemberController {
 	}
 
 	// 회원 삭제
-	@RequestMapping("/member_delete.do")
+	@RequestMapping("member_delete.do")
 	@ResponseBody
 	public String delete(int idx) {
 
@@ -74,7 +74,7 @@ public class MemberController {
 	}
 
 	// 수정할 회원 조회 페이지
-	@RequestMapping("/member_one.do")
+	@RequestMapping("member_one.do")
 	public String selectOne(int idx, Model model) {
 
 		MemberVO vo = member_dao.selectOne(idx);
@@ -87,7 +87,7 @@ public class MemberController {
 	}
 
 	// 회원 수정
-	@RequestMapping("/member_modify.do")
+	@RequestMapping("member_modify.do")
 	public String modify(MemberVO vo) {
 
 		// 비밀번호 암호화
@@ -96,8 +96,9 @@ public class MemberController {
 
 		vo.setPwd(encodePwd); // 암호화된 비밀번호 vo에 set
 
-		int res = member_dao.update(vo);
+		member_dao.update(vo);
 
+		// 수정된 항목 갱신
 		return "redirect:list.do";
 
 	}

@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 정보 수정</title>
+<script>
+	function update(f) {
+		let name = f.name.value;
+		if (name == "") {
+			alert("이름을 입력해주세요.");
+			return;
+		}
+		let id = f.id.value;
+		if (id == "") {
+			alert("아이디를 입력해주세요.");
+			return;
+		}
+		let pwd = f.pwd.value;
+		if (pwd.trim() == "") {
+			alert("비밀번호를 입력해주세요.");
+			return;
+		}
+		let email = f.email.value;
+		if (email == "") {
+			alert("이메일을 입력해주세요.");
+			return;
+		}
+		let addr = f.addr.value;
+		if (addr == "") {
+			alert("주소를 입력해주세요.");
+			return;
+		}
+		f.method = "post";
+		f.action = "member_modify.do";
+		f.submit();
+	}
+</script>
+</head>
+<body>
+	회원 정보 수정
+	<form>
+		<table border="1">
+			<tr>
+				<th>회원번호</th>
+				<td>${vo.idx}<input type="hidden" name="idx" value="${vo.idx}"></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input name="name" value="${vo.name}"></td>
+			</tr>
+			<tr>
+				<th>아이디</th>
+				<td><input name="id" value="${vo.id}"></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input name="pwd" type="password"></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input name="email" value="${vo.email}"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input name="addr" value="${vo.addr}"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="수정" onClick="update(this.form);"> 
+					<input type="button" value="취소" onClick="location.href='list.do'">
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+</body>
+</html>

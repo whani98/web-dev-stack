@@ -1,0 +1,10 @@
+package com.kh.fileupload;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class FileuploadController {
+	
+	@RequestMapping(value= {"/", "/insertform.do"})
+}

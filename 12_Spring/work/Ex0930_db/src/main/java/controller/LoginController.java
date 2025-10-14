@@ -17,14 +17,14 @@ public class LoginController {
 		this.member_dao = member_dao;
 	}
 
-	@RequestMapping(value = { "/", "/login.do" })
+	@RequestMapping(value = {"/", "login.do"})
 	public String loginForm() {
 
 		// 바로 포워딩
 		return "login/login_form";
 	}
 
-	@RequestMapping("/check_login.do")
+	@RequestMapping("check_login.do")
 	@ResponseBody
 	public String login(MemberVO vo) {
 

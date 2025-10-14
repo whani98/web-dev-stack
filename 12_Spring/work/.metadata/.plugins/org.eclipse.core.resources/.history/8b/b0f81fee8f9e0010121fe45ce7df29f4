@@ -1,0 +1,30 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.ProductDAO;
+import vo.ProductVO;
+
+@Controller
+public class ProductController {
+
+	ProductDAO product_dao;
+	
+	public void setProduct_dao(ProductDAO product_dao) {
+		this.product_dao = product_dao;
+	}
+	
+	// 상품 리스트
+	@RequestMapping("list.do")
+	public String selectList(String category, Model model) {
+		List<ProductVO> list = product_dao.selectList(category);
+		
+		model.addAttribute("list", list); //바인딩
+		
+		return "product_list";		
+	}
+}

@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/visit/resources/css/visit_style.css"></link>
+</head>
+<body>
+<div>
+<h1>~방명록 작성~</h1>
+	<form>
+		<table>
+			<tr>
+				<td id="content"><textarea></textarea></td>
+			</tr>
+			<tr>
+				<td id="name">작성자 : <input name="name"></td>
+			</tr>
+			<tr>
+				<td id="password">비밀번호 : <input type="password" name="pwd">
+					<input type="button" value="등록">
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+</body>
+</html>

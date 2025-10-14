@@ -7,27 +7,27 @@
 <title>회원 등록</title>
 <script>
 	function send(f) {
-		let name = f.name.value;
+		let name = f.name.value.trim();
 		if (name == "") {
 			alert("이름을 입력해주세요.");
 			return;
 		}
-		let id = f.id.value;
+		let id = f.id.value.trim();
 		if (id == "") {
 			alert("아이디를 입력해주세요.");
 			return;
 		}
-		let pwd = f.pwd.value;
+		let pwd = f.pwd.value.trim();
 		if (pwd == "") {
 			alert("비밀번호를 입력해주세요.");
 			return;
 		}
-		let email = f.email.value;
+		let email = f.email.value.trim();
 		if (email == "") {
 			alert("이메일을 입력해주세요.");
 			return;
 		}
-		let addr = f.addr.value;
+		let addr = f.addr.value.trim();
 		if (addr == "") {
 			alert("주소를 입력해주세요.");
 			return;

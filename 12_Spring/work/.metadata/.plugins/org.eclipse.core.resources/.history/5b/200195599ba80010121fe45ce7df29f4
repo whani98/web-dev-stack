@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Email Sender</title>
+<script src="/mail/resources/js/httpRequest.js"></script>
+</head>
+<body>
+	<form action="">
+		<input name="userEmail" placeholder="email address" />
+		<input type="button" value="본인 인증" onClick="mailCheck(this.form)"/> <br/>
+		<input id="check_input" placeholder="인증번호 6자리" maxlength="6" disable="disabled"/>
+	</form>
+</body>
+</html>
