@@ -1,7 +1,0 @@
-package vo;
-
-public class MemberVO {
-
-	private int idx;
-	private String name, id, pwd, email, addr;
-}

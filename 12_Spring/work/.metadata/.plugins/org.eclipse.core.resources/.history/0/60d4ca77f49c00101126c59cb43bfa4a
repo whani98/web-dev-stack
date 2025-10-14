@@ -1,9 +1,0 @@
-package controller;
-
-import org.springframework.stereotype.Controller;
-
-@Controller // 어노테이션 필수!
-public class BoardController {
-
-	
-}

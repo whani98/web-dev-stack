@@ -1,9 +1,0 @@
-package com.kh.mail;
-
-import org.springframework.stereotype.Controller;
-
-@Controller // 어노테이션
-public class EmailController {
-	
-	MailSendService mss;
-}
