@@ -11,7 +11,7 @@
 		<property name="defaultEncoding" value="utf-8"/>
 		<!-- 네이버 아이디, 비밀번호 -->
 		<property name="username" value="whani98"/>
-		<property name="password" value="LKC71C5H9U39"/> 
+		<property name="password" value="2단계인증 비밀번호"/> 
 		
 		<!-- 인증 관련 속성 -->
 		<property name="javaMailProperties">
