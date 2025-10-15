@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+<!--MemberMapper.java와 이름을 맞춰야한다.-->
+    <select id="selectAll">
+        select * from member
+    </select>
+
+    <select id="selectAllCount">
+        select COUNT(*) from member
+    </select>
+    <!-- 회원추가 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="member.id" keyColumn="id">
+        insert into member(name, email, age) values(#{member.name}, #{member.email}, #{member.age})
+    </insert>
+
+    <select id="selectByEmail">
+        select * from member where email = #{email}
+    </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
