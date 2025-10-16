@@ -1,0 +1,12 @@
+@charset "UTF-8";
+form{
+	border: 1px solid green;
+	text-align: center;
+	width:300;
+	padding: 30;
+}
+input{
+	border-style: none;
+	color: green;
+	border-radius: 10px;
+}

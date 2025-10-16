@@ -15,11 +15,13 @@ public class EmailController {
 		this.mss = mss;
 	}
 	
+	// 초기 페이지
 	@RequestMapping(value = {"/", "start.do"})
 	public String start() {
 		return "email_sender"; // jsp 포워딩
 	}
 	
+	// 본인인증 버튼을 누른 후
 	@RequestMapping("/mailCheck.do")
 	@ResponseBody
 	public String mailCheck(String email) {

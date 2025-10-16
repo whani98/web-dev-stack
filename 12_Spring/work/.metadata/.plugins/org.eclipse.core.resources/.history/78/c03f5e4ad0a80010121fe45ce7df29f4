@@ -1,0 +1,9 @@
+@charset "UTF-8";
+form{
+	border: 1px solid green;
+	text-align: center;
+}
+input{
+	border-style: none;
+	color: green;
+}

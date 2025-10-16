@@ -8,8 +8,14 @@
 <script src="js/httpRequest.js"></script>
 <script>
 	function m_send(f) {
+		let search = f.search_txt.value.trim();
+		// 유효성 검사
+		if(search == ""){
+			alert("검색어를 입력해주세요.");
+			return;
+		}
 		let url = "list.do";
-		let param = "search_txt=" + f.search_txt.value;
+		let param = "search_txt=" + encodeURIComponent(search);
 		sendRequest(url, param, resultFn, "get");
 
 	}
@@ -42,7 +48,7 @@
 <body>
 	<form>
 		<input name="search_txt" /> <input type="button" value="검색"
-			onclick="m_send(this.form)">
+			onClick="m_send(this.form)">
 
 		<table id="resTable" border="1"></table>
 

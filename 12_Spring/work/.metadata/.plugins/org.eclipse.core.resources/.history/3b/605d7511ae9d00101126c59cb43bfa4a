@@ -1,0 +1,13 @@
+package util;
+
+public class PwdBcrypt {
+
+	// 암호화 
+	public String encodingPwd(String pwd) {
+		
+	}
+	
+	// 복호화
+	
+	
+}

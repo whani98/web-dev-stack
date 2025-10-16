@@ -1,0 +1,7 @@
+package vo;
+
+public class VisitVO {
+
+	private int idx;
+	private String name, content, pwd, ip, regdate;
+}

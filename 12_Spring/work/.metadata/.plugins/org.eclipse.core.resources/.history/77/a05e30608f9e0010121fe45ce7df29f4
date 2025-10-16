@@ -1,0 +1,12 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+
+import dao.ProductDAO;
+
+@Controller
+public class ProductController {
+
+	ProductDAO product_dao;
+	
+}

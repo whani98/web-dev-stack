@@ -1,0 +1,22 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import service.BoardService;
+
+@Controller // 어노테이션 필수!
+public class BoardController {
+
+	BoardService service;
+
+	public void setService(BoardService service) {
+		this.service = service;
+	}
+	
+	@RequestMapping("list.do")
+	public String list() { // 반환형은 대부분 String
+		
+	}
+	
+}

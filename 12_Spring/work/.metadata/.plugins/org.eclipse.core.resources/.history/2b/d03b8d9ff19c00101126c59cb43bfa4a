@@ -1,0 +1,26 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+// implement 상속
+public class BoardDaoImpl implements BoardDAO{
+	
+    // 추상 메서드 오버라이딩
+	@Override
+	public int insert(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList() {
+		
+		// DB에서 정보를 가져왔다고 가정
+		List<String> list = new ArrayList<String>();
+		list.add("사과");
+		
+		return null;
+	}
+
+}

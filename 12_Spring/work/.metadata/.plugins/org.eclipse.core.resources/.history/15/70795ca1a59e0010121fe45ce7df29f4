@@ -1,0 +1,51 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.CartDAO;
+import vo.CartVO;
+
+@Controller
+public class CartController {
+
+	CartDAO cart_dao;
+	public void setCart_dao(CartDAO cart_dao) {
+		this.cart_dao = cart_dao;
+	}
+	
+	// 회원별 장바구니 조회
+	@RequestMapping("cart_list.do")
+	public String select(int m_idx, Model model) {
+		
+		List<CartVO> list = cart_dao.select(m_idx);
+		int total = cart_dao.selectTotalAmount(m_idx);
+		
+		// 바인딩
+		model.addAttribute("list", list); 
+		model.addAttribute("total", total);
+		
+		return "cart_list";// 포워딩
+	}
+	
+	// 장바구니 상품 삭제
+	@RequestMapping("cart_delete.do")
+	public String delete(int c_idx) {
+		int res = cart_dao.delete(c_idx);
+		
+		return "redirect:cart_list.do";
+	}
+	// 장바구니에 항목 추가
+	@RequestMapping("cart_insert.do")
+	public String insert(CartVO vo) {
+		int res = cart_dao.insert(vo);
+		
+		return "";
+	}
+	
+	
+}

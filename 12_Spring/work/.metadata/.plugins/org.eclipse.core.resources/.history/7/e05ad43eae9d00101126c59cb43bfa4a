@@ -1,0 +1,19 @@
+package util;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class PwdBcrypt {
+
+	// 암호화 
+	public String encodingPwd(String pwd) {
+		
+		BCryptPasswordEncoder encoder =
+				new BCryptPasswordEncoder();
+		
+		String encodedPwd = encoder.encode(pwd);
+	}
+	
+	// 복호화
+	
+	
+}

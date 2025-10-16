@@ -1,0 +1,5 @@
+127.0.0.1 - - [16/Oct/2025:15:22:14 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [16/Oct/2025:15:22:31 +0900] "GET /mail/ HTTP/1.1" 200 1889
+0:0:0:0:0:0:0:1 - - [16/Oct/2025:15:22:31 +0900] "GET /mail/resources/css/mailsender.css HTTP/1.1" 200 768
+0:0:0:0:0:0:0:1 - - [16/Oct/2025:15:36:51 +0900] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 864
+0:0:0:0:0:0:0:1 - - [16/Oct/2025:15:37:33 +0900] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 864

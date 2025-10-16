@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="Ex0929_di"/>
+<aop-project name="Ex0929_db"/>
+<aop-project name="Ex0930_db"/>
+<aop-project name="Ex0929_first"/>
+</aop-reference-model>

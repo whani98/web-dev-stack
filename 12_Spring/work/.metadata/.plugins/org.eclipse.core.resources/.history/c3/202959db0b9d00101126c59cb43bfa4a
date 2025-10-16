@@ -1,0 +1,37 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.DeptDAO;
+import vo.DeptVO;
+
+@Controller // 어노테이션 필수!
+public class DeptController {
+
+	DeptDAO dept_dao;
+	public DeptController(DeptDAO dept_dao) {
+		this.dept_dao = dept_dao;
+	}
+	
+	@RequestMapping("list.do")
+	public String list(Model model) {
+		List<DeptVO> list = dept_dao.selectList();
+		
+		// DB에서 가져온 값을 list에 담아서 바인딩
+		model.addAttribute("list", list);
+		
+		// 포워딩
+		return "dept_list";
+	}
+	
+	@RequestMapping("dept_delete.do")
+	public String delete(int deptno, Model model) {
+		int dno = dept_dao.delete(deptno);
+		model.addAttribute("list", dno);
+		return "redirect:/list.do";
+	}
+}

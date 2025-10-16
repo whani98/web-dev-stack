@@ -1,0 +1,21 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.VisitDAO;
+
+@Controller
+public class VisitController {
+
+	VisitDAO visit_dao;
+	public void setVisit_dao(VisitDAO visit_dao) {
+		this.visit_dao = visit_dao;
+	}
+	
+	// 방명록 조회
+	@RequestMapping("list.do")
+	public String selectList() {
+		
+	}
+}

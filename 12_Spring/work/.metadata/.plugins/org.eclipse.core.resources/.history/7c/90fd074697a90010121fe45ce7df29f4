@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+form {
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height:150px;
+	padding: 15px 30px 30px 30px; 
+	border-radius : 10px;
+	margin-top: 250px;
+	background-color: #E1EEBC;
+	display: flex;
+	flex-direction: column;
+}
+h2{
+	color: #90C67C;
+	margin-buttom: 10px;
+}
+
+input {
+	border-style: none;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+}
+
+input[type=text] {
+	outline: none;
+	height: 20px;
+	border: 1px solid #ccc;
+}
+
+input[type=button] {
+	color: white;
+	background-color: #90C67C;
+	cursor: pointer;
+}
+form .input{
+	flex-direction: row;
+}
+form #mail_check_warn {
+	align-self: center;
+	margin: auto;
+}

@@ -1,0 +1,22 @@
+package com.kh.mail;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import service.MailSendService;
+
+@Controller // 어노테이션
+public class EmailController {
+	
+	MailSendService mss;
+	
+	public EmailController(MailSendService mss) {
+		this.mss = mss;
+	}
+	
+	@RequestMapping(value = {"/", "start.do"})
+	public String start() {
+		return "email_sender"; // jsp 포워딩
+	}
+}

@@ -25,11 +25,11 @@ public class SearchAct extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// list.do?search_txt=asdfa
+		// list.do?search_txt=word
 		String search_txt = request.getParameter("search_txt");
 		
 		// UTF-8로 인코딩
-		String search = URLEncoder.encode(search_txt, "UTF8");
+		String search = URLEncoder.encode(search_txt, "UTF-8");
 		
 		String urlStr = "https://openapi.naver.com/v1/search/book.json?query=" + search + "&display=20";
 		

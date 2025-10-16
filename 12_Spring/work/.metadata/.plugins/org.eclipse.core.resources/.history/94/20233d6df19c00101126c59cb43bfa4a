@@ -1,0 +1,20 @@
+package dao;
+
+import java.util.List;
+// implement 상속
+public class BoardDaoImpl implements BoardDAO{
+	
+    // 추상 메서드 오버라이딩
+	@Override
+	public int insert(Object ob) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

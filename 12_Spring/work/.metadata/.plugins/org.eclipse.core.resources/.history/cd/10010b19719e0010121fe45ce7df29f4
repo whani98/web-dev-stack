@@ -1,0 +1,35 @@
+package controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.VisitDAO;
+import vo.VisitVO;
+
+@Controller
+public class VisitController {
+
+	VisitDAO visit_dao;
+	public void setVisit_dao(VisitDAO visit_dao) {
+		this.visit_dao = visit_dao;
+	}
+	
+	// 방명록 조회
+	@RequestMapping("list.do")
+	public String selectList(Model model) {
+		
+		List<VisitVO> list = visit_dao.selectList();
+		model.addAttribute("list", list); // 바인딩
+		
+		return "visit/visit_list"; // 포워딩
+	}
+	
+	// 글쓰기 버튼 -> 방명록 폼 페이지 이동
+	@RequestMapping("visit_insertform.do")
+	public String insertForm() {
+		return "visit_insert";
+	}
+}

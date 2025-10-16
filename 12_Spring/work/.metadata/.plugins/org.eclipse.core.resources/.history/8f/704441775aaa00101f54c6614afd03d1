@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+/* 브라우저 배경색 */
+body{
+	background:#E1EEBC29;
+}
+
+/* 이메일 인증 box */
+form {
+	margin-left: auto;
+	margin-right: auto; /* box 중앙 정렬 */
+	width: 300px;
+	height:150px;
+	padding: 15px 30px 30px 30px; 
+	border-radius : 10px;
+	margin-top: 250px;
+	background-color: #E1EEBC;
+	display: flex;
+	flex-direction: column; /* box 내 자식 세로로 나열 */
+}
+
+/* 이메일 인증 글씨 스타일 */
+h2{
+	color: #90C67C;
+	margin-bottom: 18px;
+}
+
+/* input text,button 공통 스타일 */
+input {
+	border-style: none;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+}
+
+/* input text 스타일 */
+input[type=text] {
+	outline: none;
+	height: 20px;
+	border: 1px solid #ccc;
+}
+
+/* input button 스타일 */
+input[type=button] {
+	width: 100px;
+	color: white;
+	background-color: #90C67C;
+	cursor: pointer;
+}
+
+/* box 내 div 중 class=input 가로로 나열 */
+form .input{
+	flex-direction: row;
+}
+
+form #mail_check_warn {
+	align-self: center;
+	margin: auto;
+}

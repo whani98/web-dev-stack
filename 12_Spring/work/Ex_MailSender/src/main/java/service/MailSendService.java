@@ -21,8 +21,8 @@ public class MailSendService {
 	public void makeRandomNumber() {
 		Random rnd = new Random();
 		// 난수 범위 111111 ~ 999999
-		int checkNum = rnd.nextInt(999999 - 111111 + 1) + 111111; // (숫자 개수) + 시작하는 개수
-		System.out.println("두둥:"+checkNum);
+		int checkNum = rnd.nextInt(999999 - 111111 + 1) + 111111; // (숫자 개수) + 시작하는 수
+		// System.out.println("인증번호 : " + checkNum);
 		
 		authNumber = checkNum;
 	}
@@ -30,7 +30,7 @@ public class MailSendService {
 	// 이메일을 보내기 위한 양식
 	public String joinEmail(String email) {
 		
-		makeRandomNumber(); // 호출해서 인증번호 만듦
+		makeRandomNumber(); // 호출해서 인증번호 생성
 		String setFrom = "whani98@naver.com"; // 인증번호 보내는 사람
 		String toMail = email; // 인증번호 받는 사람
 		String title = "회원가입 인증 이메일입니다.";
@@ -44,14 +44,14 @@ public class MailSendService {
 			mailHelper.setFrom(setFrom);
 			mailHelper.setTo(toMail);
 			mailHelper.setSubject(title);
-			mailHelper.setText(content, true); // true - <>태그를 동작하게 하기 위함
+			mailHelper.setText(content, true); // true - content의 <>태그를 동작하게 하기 위함
 			
 			javaMailSender.send(mail); // 전송
 			
 		} catch (Exception e) { // 전송에 실패했을경우
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		// 인증번호 반환
-		return String.valueOf(authNumber); // 정수형 -> 문자형 변환
+		return String.valueOf(authNumber); // authNumber 정수형 -> 문자형 변환
 	}
 }

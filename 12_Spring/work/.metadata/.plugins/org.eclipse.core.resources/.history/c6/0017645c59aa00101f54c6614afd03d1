@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="/mail/resources/js/httpRequest.js"></script>
+<link rel="stylesheet" href="/mail/resources/css/mailsender.css"></link>
+
+<script>
+	// 본인인증 버튼
+	function mailCheck(f) {
+		let userEmail = f.userEmail.value;
+		let url = "mailCheck.do";
+		let param = "email=" + userEmail;
+		sendRequest(url, param, resultMail, "post");
+	}
+
+	let res;
+
+	function resultMail() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+
+			let data = xhr.responseText;
+			alert("인증코드가 이메일로 전송 되었습니다");
+
+			let check_input = document.getElementById("check_input");
+			check_input.disabled = false;
+
+			res = data;
+
+		}
+	}
+	// 인증번호 확인 버튼 -> mail_check_warn에 인증 상태 출력
+	function change_input() {
+
+		let check_input = document.getElementById("check_input");
+		let mail_check_warn = document.getElementById("mail_check_warn");
+
+		// 인증성공 : 파란색, 인증번호 불일치 : 빨간색
+		if (check_input.value == res) {
+			mail_check_warn.innerHTML = "인증성공";
+			mail_check_warn.style.color = "blue";
+			location.href = "main_content.do";
+		} else {
+			mail_check_warn.innerHTML = "인증번호 불일치";
+			mail_check_warn.style.color = "red";
+		}
+
+	}
+</script>
+
+</head>
+
+<body>
+	<form>
+	<h2>이메일 인증</h2>
+		<div class="input">
+			<input name="userEmail" type="text" placeholder="email address" /> 
+			<input type="button" value="본인인증" onclick="mailCheck(this.form)" />
+		</div>
+		
+		<div class="input">
+			<input id="check_input" type="text" placeholder="인증번호 6자리" maxlength="6" disabled="disabled" /> 
+			<input type="button" value="인증번호 확인" onclick="change_input()" />
+		</div>
+		
+		<div id="mail_check_warn"></div>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+package controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import dao.MemberDAO;
+import vo.MemberVO;
+
+@Controller
+public class LoginController {
+	
+	MemberDAO member_dao;
+	
+	public void setMember_dao(MemberDAO member_dao) {
+		this.member_dao = member_dao;
+	}
+	
+	@RequestMapping(value = {"/", "/login.do"})
+	public String loginForm() {
+		
+		// 바로 포워딩
+		return "login/login_form";
+	}
+	
+	@RequestMapping("/check_login.do")
+	public String login(MemberVO vo) {
+		MemberVO baseVO = member_dao.selectIdCheck(vo.getId());
+		
+		String result = "";
+		
+		// id가 잘못된 경우
+		if(baseVO == null) {
+			result = "no_id";
+			String resultStr = String.format("[{'res':'%s'}]", result);
+			return resultStr;
+		}
+		
+	}
+	
+}
