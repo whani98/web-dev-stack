@@ -12,7 +12,7 @@
  1. DML(Data Manipulation Language) : 데이터 조작어
     -데이터를 조작하기 위한 언어 
      (INSERT : 추가, SELECT :  조회, UPDATE : 수정, DELETE : 삭제)
-     (CRED | Create : 추가, Read : 조회, Update : 수정, Delete : 삭제)
+     (CRUD | Create : 추가, Read : 조회, Update : 수정, Delete : 삭제)
     -SELECT는 데이터 조회를 의미하여 일부에서는 DQL(Data Query Language)로 분류하기도 함
  2. DDL (Data Definition Language) : 데이터 정의어
     -DB의 구조를 정의하거나 변경, 삭제하기 위한 언어
@@ -30,7 +30,7 @@ SELECT 컬럼1, 컬럼2,...
 FROM 테이블명;
 
 -테이블에서 데이터를 조회할 때 사용하는 SQL문
--SELECT 실행 걀과를 Result Set이라고 한다.
+-SELECT 실행 결과를 Result Set이라고 한다.
 -조회하고자 하는 컬럼은 반드시 from절에 지정한 테이블에 존재해야한다
 -테이블의 모든 컬럼을 조회 하려면 * 기호를 사용
 */
