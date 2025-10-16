@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="member.html" th:href="@{/member}">회원정보1</a><br>
+
+<!-- member?id=1과 동일 - 쿼리형식의 파라미터 전달-->
+<a href="member.html" th:href="@{/member(id=${id})}">회원정보2</a><br>
+
+<!-- /member/1 : path 형식의 파라미터 전달-->
+<!-- /member/{id} 실제로 보이는 path | (id=${id}) : 바인딩용-->
+<a href="member.html" th:href="@{/member/{id}(id=${id})}">회원정보3</a>
+</body>
+</html>
