@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function update(f){
+            
+            f.submit();
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">글 수정</h1>
+<form method="post" th:action="@{/update}">
+<table border="1" align="center">
+       <input type="hidden" th:value="${vo.id}" name="id"/>
+    <tr>
+        <td>#</td>
+        <td th:text="${vo.id}"></td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td><input type="text" th:value="${vo.title}" name="title"/></td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td><textarea type="text" th:text="${vo.description}" name="description" rows="5" cols="50"></textarea></td>
+    </tr>
+    <tr>
+        <td>작성일</td>
+        <td th:text="${#dates.format(vo.created, 'yyyy-MM-dd')}"></td>
+    </tr>
+    <tr>
+        <td>수정일</td>
+        <td th:text="${#dates.format(vo.updated, 'yyyy-MM-dd')}"></td>
+    </tr>
+</table>
+<div align="center">
+    <input type="button" value="취소" th:onclick="|history.back()|">
+    <input type="button" value="완료" th:onclick="update(this.form)">
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ArticleDAO">
+
+    <!-- 전체 게시글 조회 -->
+    <select id="selectAll" resultType="avo">
+        select * from article
+    </select>
+
+    <!--  게시물 한 개 조회  -->
+    <select id="showView" parameterType="Integer" resultType="avo">
+        select * from article where id = #{id}
+    </select>
+
+    <insert id="newArticle" parameterType="avo">
+        insert into article (title, description, created, updated, member_id)
+        values (#{title}, #{description}, NOW(), Now(), #{member_id})
+    </insert>
+
+    <delete id="deleteArticle" parameterType="Integer">
+        delete from article where id=#{id}
+    </delete>
+
+    <update id="updateArticle" parameterType="avo">
+        update article set title = #{title}, description = #{description}, updated = NOW() where id = #{id}
+    </update>
+</mapper>
