@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1014_db_conn" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1014_db_conn" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1014_lombok" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1014_lombok" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1015_H2" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1015_H2" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1015_jpa" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1015_jpa" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1015_jsp" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1015_jsp" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1015_thymeleaf" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1015_thymeleaf" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1016_bbs" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1016_bbs" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/ex1017_mybatis" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/ex1017_mybatis" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/work/sample" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/work/sample" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
