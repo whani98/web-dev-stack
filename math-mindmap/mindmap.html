@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interaktive Mindmap: Woche 9 - Inneres Spiel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Basic Styling */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6;
+        /* Tailwind gray-100 */
+        padding: 2rem;
+        color: #1f2937;
+        /* Tailwind gray-800 */
+      }
+
+      /* Mindmap Structure Styling */
+      .mindmap {
+        list-style: none;
+        padding: 0;
+        position: relative;
+        margin-left: 1rem;
+        /* Initial indent */
+      }
+
+      .mindmap ul {
+        list-style: none;
+        padding-left: 2rem;
+        /* Indentation for children */
+        margin-top: 0.5rem;
+        position: relative;
+        display: none;
+        /* Initially collapsed */
+      }
+
+      .mindmap li {
+        margin-bottom: 0.5rem;
+        position: relative;
+      }
+
+      /* Connecting Lines */
+      .mindmap li::before,
+      .mindmap li::after {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        /* Position lines relative to the node */
+        border-color: #9ca3af;
+        /* Tailwind gray-400 */
+        border-style: solid;
+        border-width: 0;
+      }
+
+      /* Horizontal line from node */
+      .mindmap li::before {
+        top: 12px;
+        /* Adjust vertical position */
+        width: 1rem;
+        height: 0;
+        border-top-width: 1px;
+      }
+
+      /* Vertical line connecting siblings */
+      .mindmap li::after {
+        top: -12px;
+        /* Start from above the previous sibling */
+        bottom: -12px;
+        /* Extend below the current node if it's not the last */
+        width: 0;
+        border-left-width: 1px;
+      }
+
+      /* Remove bottom part of vertical line for the last child */
+      .mindmap li:last-child::after {
+        height: 25px;
+        /* Adjust to connect properly to the node */
+        bottom: auto;
+      }
+
+      /* Remove lines for the root node */
+      .mindmap > li::before,
+      .mindmap > li::after {
+        display: none;
+      }
+
+      /* Adjust lines for nested lists */
+      .mindmap ul > li::before {
+        left: -1rem;
+      }
+
+      .mindmap ul > li::after {
+        left: -1rem;
+      }
+
+      /* Node Styling */
+      .node {
+        display: inline-flex;
+        /* Use flex for alignment */
+        align-items: center;
+        /* Vertically center content */
+        padding: 0.5rem 1rem;
+        background-color: #ffffff;
+        /* White background */
+        border: 1px solid #d1d5db;
+        /* Tailwind gray-300 */
+        border-radius: 0.5rem;
+        /* Rounded corners */
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        /* Subtle shadow */
+        min-width: 150px;
+        /* Minimum width for nodes */
+      }
+
+      .node:hover {
+        background-color: #e5e7eb;
+        /* Tailwind gray-200 */
+      }
+
+      .node.has-children::before {
+        content: "+";
+        /* Collapsed state indicator */
+        margin-right: 0.5rem;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        /* Ensure consistent spacing */
+        text-align: center;
+      }
+
+      .node.expanded::before {
+        content: "-";
+        /* Expanded state indicator */
+      }
+
+      .node-content {
+        margin-left: 0.5rem;
+        /* Space between icon/indicator and text */
+      }
+
+      /* Explanation/Quiz Styling */
+      .details {
+        background-color: #f9fafb;
+        /* Tailwind gray-50 */
+        border: 1px dashed #d1d5db;
+        /* Tailwind gray-300 */
+        border-radius: 0.375rem;
+        /* Slightly smaller radius */
+        padding: 0.75rem;
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        /* Indent details */
+        font-size: 0.875rem;
+        /* Smaller text */
+        color: #4b5563;
+        /* Tailwind gray-600 */
+        display: none;
+        /* Hidden by default */
+      }
+
+      .details p {
+        margin-bottom: 0.5rem;
+      }
+
+      .details strong {
+        color: #1f2937;
+        /* Tailwind gray-800 */
+      }
+
+      .quiz-options button {
+        display: block;
+        margin-top: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.25rem;
+        background-color: #ffffff;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+      }
+
+      .quiz-options button:hover {
+        background-color: #f3f4f6;
+      }
+
+      .feedback {
+        margin-top: 0.5rem;
+        font-weight: bold;
+      }
+
+      .feedback.correct {
+        color: #10b981;
+        /* Tailwind green-500 */
+      }
+
+      .feedback.incorrect {
+        color: #ef4444;
+        /* Tailwind red-500 */
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 640px) {
+        body {
+          padding: 1rem;
+        }
+
+        .mindmap ul {
+          padding-left: 1rem;
+        }
+
+        .mindmap li::before,
+        .mindmap li::after {
+          left: -0.75rem;
+        }
+
+        .mindmap li::before {
+          width: 0.75rem;
+        }
+
+        .mindmap ul > li::before,
+        .mindmap ul > li::after {
+          left: -0.75rem;
+        }
+
+        .node {
+          padding: 0.4rem 0.8rem;
+          min-width: 120px;
+        }
+
+        .details {
+          margin-left: 0.5rem;
+          padding: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="text-2xl font-bold mb-6 text-center text-gray-700">
+      Interaktive Mindmap: Woche 9 - Das innere Spiel der Produktivität
+    </h1>
+
+    <ul class="mindmap">
+      <li>
+        <div class="node has-children" onclick="toggleNode(this)">
+          <span class="node-content">Woche 9: Das innere Spiel</span>
+        </div>
+        <ul>
+          <li>
+            <div class="node has-children" onclick="toggleNode(this)">
+              <span class="node-content">🧠 Hirn</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node has-children" onclick="toggleNode(this)">
+                  <span class="node-content">Das Leben als Spiel</span>
+                </div>
+                <ul>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Ernst vs. Aufrichtig</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        <strong>Ernst:</strong> Verkrampft, verbissen, kritisch,
+                        energieraubend.
+                      </p>
+                      <p>
+                        <strong>Aufrichtig:</strong> Engagiert, präsent,
+                        spielerische Leichtigkeit, energiefördernd.
+                      </p>
+                      <div class="quiz">
+                        <p>
+                          <strong>Quiz:</strong> Was kennzeichnet "ernst sein"
+                          im Kontext dieser Lektion?
+                        </p>
+                        <div class="quiz-options">
+                          <button onclick="checkAnswer(this, 'b')">
+                            a) Engagiert & präsent
+                          </button>
+                          <button onclick="checkAnswer(this, 'b')">
+                            b) Verkrampft & selbstkritisch
+                          </button>
+                          <button onclick="checkAnswer(this, 'b')">
+                            c) Spielerisch & leicht
+                          </button>
+                        </div>
+                        <div class="feedback"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Vorteile Aufrichtigkeit</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Steigert Kreativität, Resilienz und
+                        Problemlösungsfähigkeit.
+                      </p>
+                      <p>Fördert Energie und verhindert Burnout.</p>
+                      <p>
+                        Wie Pipi Langstrumpf: "Ich mach' mir die Welt Widdewidde
+                        wie sie mir gefällt!"
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="node has-children" onclick="toggleNode(this)">
+                  <span class="node-content">🪷 Motivationsspektrum</span>
+                </div>
+                <ul>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">4 Arten der Motivation</span>
+                    </div>
+                    <div class="details">
+                      <p><strong>1. Extern:</strong> Belohnung/Bestrafung.</p>
+                      <p>
+                        <strong>2. Introjiziert:</strong> Innerer Druck/Scham
+                        ("Sollte").
+                      </p>
+                      <p>
+                        <strong>3. Identifiziert:</strong> Persönlicher Wert des
+                        Ziels.
+                      </p>
+                      <p><strong>4. Intrinsisch:</strong> Freude am Prozess.</p>
+                      <div class="quiz">
+                        <p>
+                          <strong>Quiz:</strong> Welche Motivationsarten sind am
+                          nachhaltigsten und kraftvollsten?
+                        </p>
+                        <div class="quiz-options">
+                          <button onclick="checkAnswer(this, 'c')">
+                            a) Extern & Introjiziert
+                          </button>
+                          <button onclick="checkAnswer(this, 'c')">
+                            b) Extern & Identifiziert
+                          </button>
+                          <button onclick="checkAnswer(this, 'c')">
+                            c) Identifiziert & Intrinsisch
+                          </button>
+                        </div>
+                        <div class="feedback"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Identifizierte Motivation entwickeln</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        <strong>Lebenskompass:</strong> Verbinde Aufgaben mit
+                        tiefen Werten.
+                      </p>
+                      <p>
+                        <strong>Identitätsveränderung:</strong> Sieh dich als
+                        die Person, die das gewünschte Verhalten zeigt (z.B.
+                        "Ich bin produktiv").
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Pygmalion-Effekt</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Deine Überzeugungen über dich selbst (deine Identität)
+                        beeinflussen deine Leistung.
+                      </p>
+                      <p>
+                        Hohe (Selbst-)Erwartungen können zu besseren Ergebnissen
+                        führen.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node has-children" onclick="toggleNode(this)">
+              <span class="node-content">🫀 Herz</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node has-children" onclick="toggleNode(this)">
+                  <span class="node-content"
+                    >Anti-Prokrastinations-Protokoll</span
+                  >
+                </div>
+                <ul>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Interne Auslöser (90%)</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Die meisten Ablenkungen kommen von innen: unangenehme
+                        Gefühle (Langeweile, Frust, Angst, Unsicherheit).
+                      </p>
+                      <p>
+                        Wir greifen zum Handy etc., um diesen Gefühlen zu
+                        entkommen.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Strategie A: Surf the Urge</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>Den Impuls zur Ablenkung bemerken.</p>
+                      <p>
+                        Sich erlauben, die Ablenkung zu tun - aber erst in 10
+                        Minuten (Timer stellen!).
+                      </p>
+                      <p>In 9/10 Fällen ist der Drang danach weg.</p>
+                      <p>
+                        <strong>Reflexion:</strong> Wann hast du das letzte Mal
+                        bewusst einen Ablenkungs-Impuls wahrgenommen und ihm
+                        nicht sofort nachgegeben?
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Strategie B: Protokoll führen</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Wenn du abgelenkt wirst: Notiere Zeit, Ort, geplante
+                        Aktivität, Gefühl & tatsächliche Ablenkung.
+                      </p>
+                      <p>
+                        Hilft, Muster zu erkennen (z.B. "Immer wenn X, fühle ich
+                        Y und mache Z").
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Reframing</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Betrachte das unangenehme Gefühl aus einer neuen
+                        Perspektive:
+                      </p>
+                      <p>
+                        Was will es mir Gutes sagen? Was ist interessant daran?
+                      </p>
+                      <p>Ist es vielleicht ein Zeichen für Wachstum?</p>
+                      <p>
+                        Ziel: Distanz zum Gefühl gewinnen, es neugierig
+                        beobachten.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node has-children" onclick="toggleNode(this)">
+              <span class="node-content">🤸 Körper</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node has-children" onclick="toggleNode(this)">
+                  <span class="node-content">💤 Schlaf verbessern</span>
+                </div>
+                <ul>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Exp 1: Nichts essen nach 18 Uhr</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Inspiriert von Bryan Johnson. Verbessert Tief- &
+                        REM-Schlaf. Wichtig: 3-5h vor dem Schlafen auch nichts
+                        mehr trinken (außer kleine Schlucke).
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Exp 2: Digital Shutdown (20 Uhr)</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Fester Kalendertermin zum Herunterfahren aller Geräte.
+                        Hilft bei der mentalen Vorbereitung auf den Schlaf.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Exp 3: Fokus-Modus</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Smartphone-Funktion nutzen, um Benachrichtigungen zur
+                        Schlafenszeit automatisch zu blockieren.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Exp 4: App-Blocker</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Apps wie Opal nutzen, um ablenkende Anwendungen gezielt
+                        zu sperren.
+                      </p>
+                      <div class="quiz">
+                        <p>
+                          <strong>Quiz:</strong> Was war KEIN empfohlenes
+                          Schlafexperiment in dieser Woche?
+                        </p>
+                        <div class="quiz-options">
+                          <button onclick="checkAnswer(this, 'b')">
+                            a) App-Blocker verwenden
+                          </button>
+                          <button onclick="checkAnswer(this, 'b')">
+                            b) Spät abends intensiv Sport treiben
+                          </button>
+                          <button onclick="checkAnswer(this, 'b')">
+                            c) Einen festen "Digital Shutdown" einplanen
+                          </button>
+                        </div>
+                        <div class="feedback"></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="node has-children" onclick="toggleNode(this)">
+                  <span class="node-content">🍎 Gesundheit verbessern</span>
+                </div>
+                <ul>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Prinzip 1: Überinvestieren</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Investiere mehr in deine Gesundheit, als du für
+                        "vernünftig" hältst. Rendite: Lebenszeit & -qualität.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Prinzip 2: Bewegung optimieren</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Bewegung hat oft den größten Hebel. Trainiere für
+                        Alltagsfähigkeiten im Alter (Stabilität, Kraft,
+                        Ausdauer).
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content">Prinzip 3: Siege feiern</span>
+                    </div>
+                    <div class="details">
+                      <p>
+                        Nimm dir Zeit, Erfolge (auch kleine) zu würdigen.
+                        Schafft positive Verstärkung.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Investition 1: DEXA-Scans</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Messung von Muskel-/Fettmasse zur Motivation und
+                        Fortschrittskontrolle.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Investition 2: Morgen-Workout</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Tägliches 30-Minuten-Workout (z.B. mit Resistance Bands)
+                        für Energie, Stimmung & besseren Schlaf.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="node" onclick="toggleDetails(this)">
+                      <span class="node-content"
+                        >Investition 3: Gesundheits-Tracking</span
+                      >
+                    </div>
+                    <div class="details">
+                      <p>
+                        Tägliche Bewertung (Win/Learning) und öffentliches
+                        Teilen zur Verbindlichkeit.
+                      </p>
+                      <p>
+                        <strong>Reflexion:</strong> Welche konkrete
+                        Gesundheitsinvestition (auch eine kleine!) könntest du
+                        diese Woche in deinen Kalender eintragen?
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node has-children" onclick="toggleNode(this)">
+              <span class="node-content">👓 Alter-Ego-Effekt</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node" onclick="toggleDetails(this)">
+                  <span class="node-content">Konzept & "Batman Effect"</span>
+                </div>
+                <div class="details">
+                  <p>
+                    Leistungssteigerung durch Annehmen einer anderen Identität
+                    (Alter Ego).
+                  </p>
+                  <p>
+                    Studie: Kinder schneiden besser ab, wenn sie sich als Batman
+                    etc. vorstellen.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="node" onclick="toggleDetails(this)">
+                  <span class="node-content">Anwendung</span>
+                </div>
+                <div class="details">
+                  <p>Bei Herausforderungen: Wer würde das meistern?</p>
+                  <p>Selbstbewusstsein stärken.</p>
+                  <p>Motivation erhöhen.</p>
+                  <div class="quiz">
+                    <p>
+                      <strong>Quiz:</strong> Wobei hilft der Alter-Ego-Effekt
+                      laut Lektion NICHT primär?
+                    </p>
+                    <div class="quiz-options">
+                      <button onclick="checkAnswer(this, 'b')">
+                        a) Motivation steigern
+                      </button>
+                      <button onclick="checkAnswer(this, 'b')">
+                        b) Aufgaben objektiv schneller erledigen
+                      </button>
+                      <button onclick="checkAnswer(this, 'b')">
+                        c) Selbstbewusstsein stärken
+                      </button>
+                    </div>
+                    <div class="feedback"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="node" onclick="toggleDetails(this)">
+                  <span class="node-content">Übung: Dein Alter Ego</span>
+                </div>
+                <div class="details">
+                  <p>1. Identifiziere eine Herausforderung.</p>
+                  <p>2. Wer (real/fiktiv) meistert das mühelos?</p>
+                  <p>3. Notiere dessen Eigenschaften/Verhalten.</p>
+                  <p>4. Schlüpfe bei der nächsten Aufgabe in diese Rolle.</p>
+                  <p>5. Reflektiere: Was hat sich verändert?</p>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node has-children" onclick="toggleNode(this)">
+              <span class="node-content">🧪 Experimente der Woche</span>
+            </div>
+            <ul>
+              <li>
+                <div class="node" onclick="toggleDetails(this)">
+                  <span class="node-content"
+                    >#1: Anti-Prokrastinations-Protokoll</span
+                  >
+                </div>
+                <div class="details">
+                  <p>Führe das Protokoll während deiner Fokussessions.</p>
+                  <p>Notiere auslösende Gefühle und deine Reaktion.</p>
+                  <p>Teile Erkenntnisse auf Circle.</p>
+                </div>
+              </li>
+              <li>
+                <div class="node" onclick="toggleDetails(this)">
+                  <span class="node-content">#2: Kernbereich optimieren</span>
+                </div>
+                <div class="details">
+                  <p>Wähle EINEN Bereich: Schlaf, Ernährung ODER Bewegung.</p>
+                  <p>Experimentiere eine Woche lang mit Verbesserungen.</p>
+                  <p>Notiere den Ansatz (z.B. im idealen Dienstag).</p>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <script>
+      // Function to toggle the visibility of child nodes
+      function toggleNode(element) {
+        const children = element.nextElementSibling; // Get the <ul> sibling
+        if (children && children.tagName === "UL") {
+          if (children.style.display === "block") {
+            children.style.display = "none";
+            element.classList.remove("expanded");
+          } else {
+            children.style.display = "block";
+            element.classList.add("expanded");
+          }
+        }
+        // Also toggle details if they exist directly under the node
+        const details = element.nextElementSibling;
+        if (details && details.classList.contains("details")) {
+          toggleDetails(element); // Reuse details toggle logic
+        }
+      }
+      // Function to toggle the visibility of details/quiz sections
+      function toggleDetails(element) {
+        const details = element.nextElementSibling;
+        if (details && details.classList.contains("details")) {
+          if (details.style.display === "block") {
+            details.style.display = "none";
+          } else {
+            details.style.display = "block";
+          }
+        }
+      }
+      // Function to check quiz answers
+      function checkAnswer(button, correctAnswer) {
+        const quizDiv = button.closest(".quiz");
+        const feedbackDiv = quizDiv.querySelector(".feedback");
+        const selectedAnswer = button.textContent.trim().substring(0, 1); // Get 'a', 'b', or 'c'
+        // Disable buttons after answering
+        const buttons = quizDiv.querySelectorAll(".quiz-options button");
+        buttons.forEach((btn) => (btn.disabled = true));
+        if (selectedAnswer === correctAnswer) {
+          feedbackDiv.textContent = "Richtig! Sehr gut.";
+          feedbackDiv.className = "feedback correct";
+          button.style.backgroundColor = "#d1fae5"; // Light green
+          button.style.borderColor = "#10b981";
+        } else {
+          feedbackDiv.textContent = `Leider falsch. Die richtige Antwort ist ${correctAnswer.toUpperCase()}.`;
+          feedbackDiv.className = "feedback incorrect";
+          button.style.backgroundColor = "#fee2e2"; // Light red
+          button.style.borderColor = "#ef4444";
+          // Highlight the correct answer
+          buttons.forEach((btn) => {
+            if (btn.textContent.trim().substring(0, 1) === correctAnswer) {
+              btn.style.backgroundColor = "#d1fae5";
+              btn.style.borderColor = "#10b981";
+            }
+          });
+        }
+      }
+      // Automatically expand the first level on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstLevelNode = document.querySelector(".mindmap > li > .node");
+        if (firstLevelNode) {
+          toggleNode(firstLevelNode);
+        }
+      });
+    </script>
+  </body>
+</html>
